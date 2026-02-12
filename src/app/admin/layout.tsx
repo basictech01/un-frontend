@@ -1,7 +1,7 @@
 "use client";
 
 import { AuthGuard } from "@/features/auth/ui/organisms/AuthGuard";
-import { DashboardLayout } from "@/app/admin/components/DashboardLayout";
+import { AdminDashboardLayout as DashboardLayout } from "@/features/auth/ui/templates/AdminDashboardLayout";
 
 export default function AdminLayout({
   children,

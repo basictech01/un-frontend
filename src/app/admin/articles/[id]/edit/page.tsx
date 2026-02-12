@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { Button } from "@/ui/button";
 import { ArrowLeft, Save, X } from "lucide-react";
-import { ArticleForm } from "@/features/article/ui/organisms/ArticleForm";
+import { ArticleForm } from "@/features/article/ui/molecules/ArticleForm";
 import { useArticle } from "@/features/article/hooks/useArticle";
 import { useUpdateArticle } from "@/features/article/hooks/useUpdateArticle";
 import { Skeleton } from "@/ui/skeleton";

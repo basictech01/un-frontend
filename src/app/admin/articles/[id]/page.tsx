@@ -11,7 +11,7 @@ import { ArticleDetailHeader } from "@/features/article/ui/molecules/ArticleDeta
 import { ArticleDetailContent } from "@/features/article/ui/molecules/ArticleDetailContent";
 import { useArticle } from "@/features/article/hooks/useArticle";
 import { useArticleActions } from "@/features/article/hooks/useArticleActions";
-import { ArticleRejectionDialog } from "@/features/article/ui/organisms/ArticleRejectionDialog";
+import { ArticleRejectionDialog } from "@/features/article/ui/molecules/ArticleRejectionDialog";
 import { ArticleStatus } from "@/types/enums";
 import { formatDate } from "@/lib/utils";
 

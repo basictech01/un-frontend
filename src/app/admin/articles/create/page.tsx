@@ -12,7 +12,7 @@ import {
 import { Label } from "@/ui/label";
 import { ArrowLeft, Loader2, Save, Check, RotateCcw } from "lucide-react";
 import Link from "next/link";
-import { ArticleForm } from "@/features/article/ui/organisms/ArticleForm";
+import { ArticleForm } from "@/features/article/ui/molecules/ArticleForm";
 import { useCreateArticle } from "@/features/article/hooks/useCreateArticle";
 import { ArticleStatus } from "@/types/enums";
 
