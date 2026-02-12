@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: '**',
       },
+      // Azure Blob Storage for uploaded images
+      {
+        protocol: 'https',
+        hostname: 'uttrakhandnews.blob.core.windows.net',
+      },
     ],
   },
 
