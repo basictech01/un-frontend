@@ -12,20 +12,17 @@ import {
   CardTitle,
 } from "@/ui/card";
 import { Loader2, Mail, Lock, ArrowRight } from "lucide-react";
+import { useLogin } from "../../hooks/useLogin";
 
-interface LoginFormProps {
-  onSubmit: (email: string, password: string) => void;
-  isLoading: boolean;
-}
-
-export function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
+export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { handleLogin, isLoading } = useLogin();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!email || !password) return;
-    onSubmit(email, password);
+    handleLogin(email, password);
   };
 
   return (

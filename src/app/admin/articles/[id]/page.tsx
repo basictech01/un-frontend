@@ -13,7 +13,7 @@ import { useArticle } from "@/features/article/hooks/useArticle";
 import { useArticleActions } from "@/features/article/hooks/useArticleActions";
 import { ArticleRejectionDialog } from "@/features/article/ui/molecules/ArticleRejectionDialog";
 import { ArticleStatus } from "@/types/enums";
-import { formatDate } from "@/lib/utils";
+import { formatDate, getInitials } from "@/lib/utils";
 
 export default function ArticleDetailPage({
   params,
@@ -21,7 +21,8 @@ export default function ArticleDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const articleId = parseInt(id, 10);
+  // Use -1 as sentinel value for invalid IDs to prevent showing wrong article
+  const articleId = parseInt(id, 10) || -1;
   const { article, loading } = useArticle(articleId);
   const { handleApprove, handleReject, isApproving, isRejecting } =
     useArticleActions();
@@ -159,12 +160,7 @@ export default function ArticleDetailPage({
                     backgroundColor: 'hsl(var(--color-primary) / 0.1)',
                     color: 'hsl(var(--color-primary))'
                   }}>
-                    {article.author.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")
-                      .toUpperCase()
-                      .slice(0, 2)}
+                    {getInitials(article.author.name)}
                   </AvatarFallback>
                 </Avatar>
                 <div>

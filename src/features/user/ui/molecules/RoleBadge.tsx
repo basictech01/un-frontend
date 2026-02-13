@@ -1,37 +1,27 @@
 import { Badge } from "@/ui/badge";
 import { cn } from "@/lib/utils";
+import { UserRole, UserRoleLabels } from "@/types/enums";
 
-const roleStyles: Record<string, { bg: string; text: string; border: string }> = {
-  ADMIN: {
+const roleStyles: Record<UserRole, { bg: string; text: string; border: string }> = {
+  [UserRole.ADMIN]: {
     bg: 'hsl(var(--color-primary) / 0.15)',
     text: 'hsl(var(--color-primary))',
     border: 'hsl(var(--color-primary) / 0.3)'
   },
-  AUTHOR: {
+  [UserRole.AUTHOR]: {
     bg: 'hsl(var(--color-secondary) / 0.15)',
     text: 'hsl(var(--color-secondary))',
     border: 'hsl(var(--color-secondary) / 0.3)'
   },
-  USER: {
-    bg: 'hsl(220 13% 95%)',
-    text: 'hsl(220 9% 46%)',
-    border: 'hsl(220 13% 85%)'
-  },
-};
-
-const roleLabels: Record<string, string> = {
-  ADMIN: "Admin",
-  AUTHOR: "Author",
-  USER: "User",
 };
 
 interface RoleBadgeProps {
-  role: string;
+  role: UserRole;
   className?: string;
 }
 
 export function RoleBadge({ role, className }: RoleBadgeProps) {
-  const styles = roleStyles[role] ?? roleStyles.USER;
+  const styles = roleStyles[role] ?? roleStyles[UserRole.AUTHOR];
 
   return (
     <Badge
@@ -43,7 +33,7 @@ export function RoleBadge({ role, className }: RoleBadgeProps) {
         borderColor: styles.border
       }}
     >
-      {roleLabels[role] ?? role}
+      {UserRoleLabels[role]}
     </Badge>
   );
 }

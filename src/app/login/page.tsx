@@ -3,20 +3,19 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { LoginForm } from "@/features/auth/ui/molecules/LoginForm";
-import { useLogin } from "@/features/auth/hooks/useLogin";
+import { LoginForm } from "@/features/auth/ui/organisms/LoginForm";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import { UserRole } from "@/types/enums";
 
 export default function LoginPage() {
-  const { handleLogin, isLoading } = useLogin();
   const { isAuthenticated, user, isLoading: authLoading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     if (authLoading) return;
     if (isAuthenticated && user) {
-      if (user.role === "admin") router.push("/admin");
-      else if (user.role === "author") router.push("/author");
+      if (user.role === UserRole.ADMIN) router.push("/admin");
+      else if (user.role === UserRole.AUTHOR) router.push("/author");
     }
   }, [isAuthenticated, user, authLoading, router]);
 
@@ -51,7 +50,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <LoginForm onSubmit={handleLogin} isLoading={isLoading} />
+        <LoginForm />
 
         {/* Footer */}
         <p className="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">

@@ -17,6 +17,7 @@ export function useLogin() {
       const user = await login(email, password);
       toast.success(`Welcome back, ${user.name}!`);
 
+      // Redirect based on role
       if (user.role === UserRole.ADMIN) {
         router.push("/admin");
       } else if (user.role === UserRole.AUTHOR) {

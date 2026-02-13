@@ -6,9 +6,14 @@ export enum ArticleStatus {
 }
 
 export enum UserRole {
-  ADMIN = "admin",
-  AUTHOR = "author",
+  ADMIN = "ADMIN",
+  AUTHOR = "AUTHOR",
 }
+
+export const UserRoleLabels: Record<UserRole, string> = {
+  [UserRole.ADMIN]: "Admin",
+  [UserRole.AUTHOR]: "Author",
+};
 
 export const SECTIONS = {
   VOICES_AND_VISIONARIES: {

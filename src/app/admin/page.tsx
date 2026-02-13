@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useMemo } from "react";
 import { Button } from "@/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import {
@@ -26,13 +27,16 @@ export default function AdminDashboardPage() {
   });
 
   // Calculate statistics
-  const stats = {
-    total: totalCount,
-    pending: articles.filter((a) => a.status === "PENDING").length,
-    approved: articles.filter((a) => a.status === "APPROVED").length,
-    rejected: articles.filter((a) => a.status === "REJECTED").length,
-    draft: articles.filter((a) => a.status === "DRAFT").length,
-  };
+  const stats = useMemo(
+    () => ({
+      total: totalCount,
+      pending: articles.filter((a) => a.status === "PENDING").length,
+      approved: articles.filter((a) => a.status === "APPROVED").length,
+      rejected: articles.filter((a) => a.status === "REJECTED").length,
+      draft: articles.filter((a) => a.status === "DRAFT").length,
+    }),
+    [articles, totalCount]
+  );
 
   const recentArticles = articles.slice(0, 5);
 
@@ -47,11 +51,7 @@ export default function AdminDashboardPage() {
           <Button
             asChild
             size="lg"
-            className="shadow-md hover:shadow-lg"
-            style={{
-              backgroundColor: 'hsl(var(--color-primary))',
-              color: 'white'
-            }}
+            className="bg-primary text-primary-foreground shadow-md hover:shadow-lg"
           >
             <Link href="/admin/articles/create">
               <Plus className="mr-2 h-5 w-5" />

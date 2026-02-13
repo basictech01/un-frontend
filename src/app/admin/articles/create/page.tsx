@@ -17,7 +17,7 @@ import { useCreateArticle } from "@/features/article/hooks/useCreateArticle";
 import { ArticleStatus } from "@/types/enums";
 
 export default function CreateArticlePage() {
-  const { formData, handleChange, handleSubmit, isLoading } =
+  const { formData, handleChange, handleSubmit, handleReset, isLoading } =
     useCreateArticle();
 
   const handleSaveDraft = () => {
@@ -28,10 +28,6 @@ export default function CreateArticlePage() {
   const handlePublish = () => {
     handleChange("status", ArticleStatus.PENDING);
     setTimeout(() => handleSubmit(), 0);
-  };
-
-  const handleReset = () => {
-    window.location.reload();
   };
 
   return (

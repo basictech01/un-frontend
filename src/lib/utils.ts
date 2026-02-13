@@ -41,3 +41,27 @@ export function formatStatusLabel(status: string): string {
       return status;
   }
 }
+
+/**
+ * Extracts initials from a full name
+ * Takes the first character of each word (up to 2 words) and returns uppercase initials
+ * @param name - Full name string
+ * @returns Uppercase initials (max 2 characters)
+ * @example
+ * getInitials("John Doe") // returns "JD"
+ * getInitials("Jane") // returns "J"
+ * getInitials("John Paul Smith") // returns "JP"
+ * getInitials("") // returns ""
+ */
+export function getInitials(name: string): string {
+  if (!name || typeof name !== "string") return "";
+
+  return name
+    .trim()
+    .split(" ")
+    .filter(Boolean)
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}

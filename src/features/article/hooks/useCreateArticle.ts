@@ -79,5 +79,9 @@ export function useCreateArticle() {
     }
   }, [formData, createMutation, router]);
 
-  return { formData, handleChange, handleSubmit, isLoading: loading };
+  const handleReset = useCallback(() => {
+    setFormData(initialArticleForm);
+  }, []);
+
+  return { formData, handleChange, handleSubmit, handleReset, isLoading: loading };
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_PENDING_ARTICLES } from "../data/article.queries";
 import type { ArticleConnection } from "@/types/common";
@@ -11,9 +12,18 @@ export function usePendingArticles() {
     pendingArticles: ArticleConnection;
   }>(GET_PENDING_ARTICLES, { variables: { first: PAGE_SIZE } });
 
-  const articles = data?.pendingArticles.edges.map((e) => e.node) ?? [];
-  const pageInfo = data?.pendingArticles.pageInfo;
-  const totalCount = data?.pendingArticles.totalCount ?? 0;
+  const articles = useMemo(
+    () => data?.pendingArticles.edges.map((e) => e.node) ?? [],
+    [data]
+  );
+  const pageInfo = useMemo(
+    () => data?.pendingArticles.pageInfo,
+    [data]
+  );
+  const totalCount = useMemo(
+    () => data?.pendingArticles.totalCount ?? 0,
+    [data]
+  );
 
   const loadMore = () => {
     if (!pageInfo?.hasNextPage || !pageInfo.endCursor) return;

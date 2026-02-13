@@ -3,11 +3,12 @@
 import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../hooks/useAuth";
-import { Loader2 } from "lucide-react";
+import { UserRole } from "@/types/enums";
+import { FullScreenLoader } from "@/components/organisms";
 
 interface AuthGuardProps {
   children: ReactNode;
-  requiredRole?: string;
+  requiredRole?: UserRole;
 }
 
 export function AuthGuard({ children, requiredRole }: AuthGuardProps) {
@@ -22,23 +23,15 @@ export function AuthGuard({ children, requiredRole }: AuthGuardProps) {
       return;
     }
 
+    // If role doesn't match, redirect to login
+    // useLogin hook will handle redirecting to the correct dashboard after login
     if (requiredRole && user?.role !== requiredRole) {
-      if (user?.role === "admin") {
-        router.push("/admin");
-      } else if (user?.role === "author") {
-        router.push("/author");
-      } else {
-        router.push("/login");
-      }
+      router.push("/login");
     }
   }, [isLoading, isAuthenticated, user, requiredRole, router]);
 
   if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
+    return <FullScreenLoader message="Verifying your credentials..." />;
   }
 
   if (!isAuthenticated) return null;

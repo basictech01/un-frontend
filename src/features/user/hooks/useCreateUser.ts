@@ -7,12 +7,13 @@ import { toast } from "sonner";
 import { CREATE_USER } from "../data/user.mutations";
 import { GET_USERS } from "../data/user.queries";
 import type { UserProfile } from "@/types/common";
+import { UserRole } from "@/types/enums";
 
 export interface UserFormState {
   name: string;
   email: string;
   password: string;
-  role: "AUTHOR" | "ADMIN";
+  role: UserRole;
   is_active: boolean;
 }
 
@@ -20,7 +21,7 @@ export const initialUserForm: UserFormState = {
   name: "",
   email: "",
   password: "",
-  role: "AUTHOR",
+  role: UserRole.AUTHOR,
   is_active: true,
 };
 
@@ -87,5 +88,9 @@ export function useCreateUser() {
     }
   }, [formData, createMutation, router]);
 
-  return { formData, handleChange, handleSubmit, isLoading: loading };
+  const handleReset = useCallback(() => {
+    setFormData(initialUserForm);
+  }, []);
+
+  return { formData, handleChange, handleSubmit, handleReset, isLoading: loading };
 }
