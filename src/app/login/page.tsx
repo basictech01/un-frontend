@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { LoginForm } from "@/features/auth/ui/organisms/LoginForm";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { UserRole } from "@/types/enums";
@@ -30,18 +29,8 @@ export default function LoginPage() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-md">
-        {/* Logo/Brand */}
+        {/* Page Title */}
         <div className="mb-8 text-center">
-          <div className="mb-6 inline-flex items-center justify-center">
-            <Image
-              src="/logo/image.png"
-              alt="Uttrakhand News"
-              width={180}
-              height={60}
-              className="h-auto w-auto max-w-[180px]"
-              priority
-            />
-          </div>
           <h1 className="mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-3xl font-bold text-transparent">
             Editorial Management
           </h1>

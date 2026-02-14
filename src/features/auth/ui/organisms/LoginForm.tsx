@@ -97,25 +97,6 @@ export function LoginForm() {
             )}
           </Button>
         </form>
-
-        {/* Divider */}
-        <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-slate-200 dark:border-slate-700" />
-          </div>
-          <div className="relative flex justify-center text-xs">
-            <span className="bg-white px-2 text-slate-500 dark:bg-slate-900 dark:text-slate-400">
-              Secure admin access
-            </span>
-          </div>
-        </div>
-
-        {/* Info note */}
-        <div className="rounded-lg bg-blue-50 p-3 dark:bg-blue-950/30">
-          <p className="text-center text-xs text-slate-600 dark:text-slate-400">
-            🔒 Your connection is encrypted and secure
-          </p>
-        </div>
       </CardContent>
     </Card>
   );
