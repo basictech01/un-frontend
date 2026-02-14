@@ -1,20 +1,6 @@
-import Image from "next/image";
-
 export function UNLoader() {
   return (
     <div className="un-loader-container">
-      {/* Logo with breathing animation */}
-      <div className="un-logo-wrapper">
-        <Image
-          src="/logo/image.png"
-          alt="Uttrakhand Next"
-          width={120}
-          height={40}
-          className="un-logo"
-          priority
-        />
-      </div>
-
       {/* Loading text */}
       <div className="un-loading-text">LOADING...</div>
 
