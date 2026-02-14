@@ -86,16 +86,6 @@ export default function ProfilePage() {
                 admin@uttrakhandnews.com
               </p>
             </div>
-            <Button
-              variant="outline"
-              className="w-full"
-              style={{
-                borderColor: "hsl(var(--color-primary) / 0.3)",
-                color: "hsl(var(--color-primary))",
-              }}
-            >
-              Change Photo
-            </Button>
           </CardContent>
         </Card>
 

@@ -32,11 +32,7 @@ export default function UsersPage() {
           <Button
             asChild
             size="lg"
-            className="shadow-md transition-all hover:shadow-lg"
-            style={{
-              backgroundColor: 'hsl(var(--color-secondary))',
-              color: 'white'
-            }}
+            className="bg-secondary text-secondary-foreground shadow-md transition-all hover:shadow-lg"
           >
             <Link href="/admin/users/create">
               <Plus className="mr-2 h-5 w-5" />
@@ -63,11 +59,7 @@ export default function UsersPage() {
           <Button
             variant="outline"
             onClick={loadMore}
-            className="shadow-sm hover:shadow-md"
-            style={{
-              borderColor: 'hsl(var(--color-secondary) / 0.3)',
-              color: 'hsl(var(--color-secondary))'
-            }}
+            className="border-secondary-light text-secondary shadow-sm hover:shadow-md"
           >
             Load More Users
           </Button>

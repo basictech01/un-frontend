@@ -56,33 +56,23 @@ export default function EditArticlePage({
   return (
     <div className="space-y-6">
       {/* Header with gradient */}
-      <div
-        className="rounded-lg border p-6 shadow-sm"
-        style={{
-          borderColor: 'hsl(var(--color-primary) / 0.2)',
-          background: 'linear-gradient(135deg, hsl(var(--color-primary) / 0.05) 0%, hsl(var(--color-primary) / 0.1) 50%, hsl(var(--color-secondary) / 0.05) 100%)'
-        }}
-      >
+      <div className="border-primary-subtle rounded-lg border p-6 shadow-sm bg-gradient-primary-soft">
         <div className="flex items-center gap-4">
           <Button
             asChild
             variant="ghost"
             size="icon"
-            className="rounded-full"
-            style={{
-              backgroundColor: 'hsl(var(--color-card))',
-              color: 'hsl(var(--color-primary))'
-            }}
+            className="rounded-full bg-card text-primary"
           >
             <Link href={`/admin/articles/${articleId}`}>
               <ArrowLeft className="h-5 w-5" />
             </Link>
           </Button>
           <div>
-            <h1 className="text-3xl font-bold" style={{ color: 'hsl(var(--color-foreground))' }}>
+            <h1 className="text-3xl font-bold text-foreground">
               Edit Article
             </h1>
-            <p className="text-sm" style={{ color: 'hsl(var(--color-muted-foreground))' }}>
+            <p className="text-sm text-muted-foreground">
               Update article details and content
             </p>
           </div>
@@ -90,13 +80,9 @@ export default function EditArticlePage({
       </div>
 
       {/* Form Card */}
-      <Card className="relative shadow-sm" style={{ borderColor: 'hsl(var(--color-border))' }}>
+      <Card className="relative border-border shadow-sm">
         <CardHeader
-          className="border-b"
-          style={{
-            borderColor: 'hsl(var(--color-border))',
-            background: 'linear-gradient(135deg, hsl(var(--color-primary) / 0.03) 0%, hsl(var(--color-primary) / 0.05) 100%)'
-          }}
+          className="border-b card-header-primary"
         >
           <CardTitle style={{ color: 'hsl(var(--color-primary))' }}>Article Details</CardTitle>
         </CardHeader>
@@ -118,10 +104,7 @@ export default function EditArticlePage({
               variant="outline"
               onClick={() => router.push(`/admin/articles/${articleId}`)}
               disabled={isLoading}
-              style={{
-                borderColor: 'hsl(var(--color-border))',
-                color: 'hsl(var(--color-muted-foreground))'
-              }}
+              className="border-border text-muted-foreground"
             >
               <X className="mr-2 h-4 w-4" />
               Cancel
@@ -130,11 +113,7 @@ export default function EditArticlePage({
             <Button
               onClick={onSubmit}
               disabled={isLoading}
-              className="shadow-md"
-              style={{
-                backgroundColor: 'hsl(var(--color-primary))',
-                color: 'white'
-              }}
+              className="bg-primary text-primary-foreground shadow-md"
             >
               <Save className="mr-2 h-4 w-4" />
               {isLoading ? 'Saving...' : 'Save Changes'}

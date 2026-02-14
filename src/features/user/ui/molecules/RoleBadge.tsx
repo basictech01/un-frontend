@@ -21,7 +21,17 @@ interface RoleBadgeProps {
 }
 
 export function RoleBadge({ role, className }: RoleBadgeProps) {
+  // Handle undefined or invalid roles
+  if (!role) {
+    return (
+      <Badge variant="outline" className={cn("font-medium shadow-sm", className)}>
+        —
+      </Badge>
+    );
+  }
+
   const styles = roleStyles[role] ?? roleStyles[UserRole.AUTHOR];
+  const label = UserRoleLabels[role] ?? role;
 
   return (
     <Badge
@@ -33,7 +43,7 @@ export function RoleBadge({ role, className }: RoleBadgeProps) {
         borderColor: styles.border
       }}
     >
-      {UserRoleLabels[role]}
+      {label}
     </Badge>
   );
 }

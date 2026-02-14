@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@/ui/button";
-import { Menu, type LucideIcon } from "lucide-react";
-import { useSidebar } from "@/ui/sidebar";
+import { type LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +21,6 @@ export function PageHeader({
   colorScheme = 'primary',
   showIconBadge = false,
 }: PageHeaderProps) {
-  const { toggleSidebar } = useSidebar();
 
   const isPrimary = colorScheme === 'primary';
 
@@ -36,18 +33,6 @@ export function PageHeader({
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleSidebar}
-            className={cn(
-              "md:hidden",
-              isPrimary ? "text-primary" : "text-secondary"
-            )}
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
-
           {showIconBadge ? (
             <div className="flex items-center gap-3">
               <div

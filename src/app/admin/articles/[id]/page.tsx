@@ -49,33 +49,23 @@ export default function ArticleDetailPage({
   return (
     <div className="space-y-6">
       {/* Header with gradient background */}
-      <div
-        className="rounded-lg border p-6 shadow-sm"
-        style={{
-          borderColor: 'hsl(var(--color-primary) / 0.2)',
-          background: 'linear-gradient(135deg, hsl(var(--color-primary) / 0.05) 0%, hsl(var(--color-primary) / 0.1) 50%, hsl(var(--color-secondary) / 0.05) 100%)'
-        }}
-      >
+      <div className="border-primary-subtle rounded-lg border p-6 shadow-sm bg-gradient-primary-soft">
         <div className="flex items-center gap-4">
           <Button
             variant="ghost"
             size="icon"
             asChild
-            className="rounded-full"
-            style={{
-              backgroundColor: 'hsl(var(--color-card))',
-              color: 'hsl(var(--color-primary))'
-            }}
+            className="rounded-full bg-card text-primary"
           >
             <Link href="/admin">
               <ArrowLeft className="h-4 w-4" />
             </Link>
           </Button>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold" style={{ color: 'hsl(var(--color-foreground))' }}>
+            <h1 className="text-2xl font-bold text-foreground">
               Article Detail
             </h1>
-            <p className="text-sm" style={{ color: 'hsl(var(--color-muted-foreground))' }}>
+            <p className="text-sm text-muted-foreground">
               Review and manage article content
             </p>
           </div>
@@ -84,11 +74,7 @@ export default function ArticleDetailPage({
               asChild
               variant="outline"
               size="sm"
-              style={{
-                borderColor: 'hsl(var(--color-primary) / 0.3)',
-                color: 'hsl(var(--color-primary))',
-                backgroundColor: 'hsl(var(--color-card))'
-              }}
+              className="border-primary-light bg-card text-primary"
             >
               <Link href={`/admin/articles/${article.id}/edit`}>
                 <Pencil className="mr-2 h-4 w-4" />
@@ -101,11 +87,7 @@ export default function ArticleDetailPage({
                   size="sm"
                   onClick={() => handleApprove(article.id)}
                   disabled={isApproving}
-                  className="shadow-sm"
-                  style={{
-                    backgroundColor: 'hsl(var(--color-secondary))',
-                    color: 'white'
-                  }}
+                  className="bg-secondary text-secondary-foreground shadow-sm"
                 >
                   <CheckCircle className="mr-1 h-4 w-4" />
                   Approve
@@ -134,44 +116,30 @@ export default function ArticleDetailPage({
 
         <aside className="space-y-4">
           {article.author && (
-            <Card
-              className="shadow-sm"
-              style={{
-                borderColor: 'hsl(var(--color-primary) / 0.2)'
-              }}
-            >
-              <CardHeader
-                className="border-b"
-                style={{
-                  borderColor: 'hsl(var(--color-border))',
-                  background: 'linear-gradient(135deg, hsl(var(--color-primary) / 0.05) 0%, hsl(var(--color-primary) / 0.08) 100%)'
-                }}
-              >
-                <CardTitle className="text-sm font-semibold" style={{ color: 'hsl(var(--color-primary))' }}>
+            <Card className="border-primary-subtle shadow-sm">
+              <CardHeader className="border-b card-header-primary">
+                <CardTitle className="text-sm font-semibold text-primary">
                   Author
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex items-center gap-3 pt-4">
-                <Avatar className="h-12 w-12 border-2" style={{ borderColor: 'hsl(var(--color-primary) / 0.2)' }}>
+                <Avatar className="border-primary-subtle h-12 w-12 border-2">
                   <AvatarImage
                     src={article.author.profile_photo ?? undefined}
                   />
-                  <AvatarFallback style={{
-                    backgroundColor: 'hsl(var(--color-primary) / 0.1)',
-                    color: 'hsl(var(--color-primary))'
-                  }}>
+                  <AvatarFallback className="bg-primary-ultra-light text-primary">
                     {getInitials(article.author.name)}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-semibold" style={{ color: 'hsl(var(--color-foreground))' }}>
+                  <p className="font-semibold text-foreground">
                     {article.author.name}
                   </p>
-                  <p className="text-xs" style={{ color: 'hsl(var(--color-muted-foreground))' }}>
+                  <p className="text-xs text-muted-foreground">
                     {article.author.email}
                   </p>
                   {article.author.profession && (
-                    <p className="text-xs" style={{ color: 'hsl(var(--color-muted-foreground))' }}>
+                    <p className="text-xs text-muted-foreground">
                       {article.author.profession}
                     </p>
                   )}
@@ -180,40 +148,29 @@ export default function ArticleDetailPage({
             </Card>
           )}
 
-          <Card
-            className="shadow-sm"
-            style={{
-              borderColor: 'hsl(var(--color-secondary) / 0.2)'
-            }}
-          >
-            <CardHeader
-              className="border-b"
-              style={{
-                borderColor: 'hsl(var(--color-border))',
-                background: 'linear-gradient(135deg, hsl(var(--color-secondary) / 0.05) 0%, hsl(var(--color-secondary) / 0.08) 100%)'
-              }}
-            >
-              <CardTitle className="text-sm font-semibold" style={{ color: 'hsl(var(--color-secondary))' }}>
+          <Card className="border-secondary-subtle shadow-sm">
+            <CardHeader className="border-b card-header-secondary">
+              <CardTitle className="text-sm font-semibold text-secondary">
                 Timeline
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 pt-4 text-sm">
-              <div className="flex items-center justify-between rounded-md p-2" style={{ backgroundColor: 'hsl(var(--color-muted) / 0.3)' }}>
-                <span style={{ color: 'hsl(var(--color-muted-foreground))' }}>Created</span>
-                <span className="font-medium" style={{ color: 'hsl(var(--color-foreground))' }}>
+              <div className="flex items-center justify-between rounded-md bg-muted-light p-2">
+                <span className="text-muted-foreground">Created</span>
+                <span className="font-medium text-foreground">
                   {formatDate(article.created_at)}
                 </span>
               </div>
-              <div className="flex items-center justify-between rounded-md p-2" style={{ backgroundColor: 'hsl(var(--color-muted) / 0.3)' }}>
-                <span style={{ color: 'hsl(var(--color-muted-foreground))' }}>Updated</span>
-                <span className="font-medium" style={{ color: 'hsl(var(--color-foreground))' }}>
+              <div className="flex items-center justify-between rounded-md bg-muted-light p-2">
+                <span className="text-muted-foreground">Updated</span>
+                <span className="font-medium text-foreground">
                   {formatDate(article.updated_at)}
                 </span>
               </div>
               {article.published_at && (
-                <div className="flex items-center justify-between rounded-md p-2" style={{ backgroundColor: 'hsl(var(--color-secondary) / 0.1)' }}>
-                  <span style={{ color: 'hsl(var(--color-muted-foreground))' }}>Published</span>
-                  <span className="font-medium" style={{ color: 'hsl(var(--color-secondary))' }}>
+                <div className="flex items-center justify-between rounded-md bg-secondary-very-light p-2">
+                  <span className="text-muted-foreground">Published</span>
+                  <span className="font-medium text-secondary">
                     {formatDate(article.published_at)}
                   </span>
                 </div>

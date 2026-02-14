@@ -136,8 +136,12 @@
   }
 }
 
-/* Animation utilities */
+/* ============================================
+   UTILITY CLASSES - Replace Inline Styles
+   ============================================ */
+
 @layer utilities {
+  /* Animation delays */
   .animation-delay-2000 {
     animation-delay: 2s;
   }
@@ -146,33 +150,223 @@
     animation-delay: 4s;
   }
 
-  /* Gradient backgrounds for page headers and cards */
+  /* ==================== GRADIENT BACKGROUNDS ==================== */
+
+  /* Primary Gradients */
   .bg-gradient-primary-soft {
     background: linear-gradient(135deg, hsl(var(--color-primary) / 0.05) 0%, hsl(var(--color-primary) / 0.1) 50%, hsl(var(--color-secondary) / 0.05) 100%);
-  }
-
-  .bg-gradient-secondary-soft {
-    background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.05) 0%, hsl(var(--color-secondary) / 0.1) 50%, hsl(var(--color-primary) / 0.05) 100%);
   }
 
   .bg-gradient-primary-subtle {
     background: linear-gradient(135deg, hsl(var(--color-primary) / 0.03) 0%, hsl(var(--color-primary) / 0.05) 100%);
   }
 
-  .bg-gradient-secondary-subtle {
-    background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.03) 0%, hsl(var(--color-secondary) / 0.05) 100%);
-  }
-
   .bg-gradient-primary-card {
     background: linear-gradient(135deg, hsl(var(--color-primary) / 0.05) 0%, hsl(var(--color-primary) / 0.1) 100%);
+  }
+
+  /* Secondary Gradients */
+  .bg-gradient-secondary-soft {
+    background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.05) 0%, hsl(var(--color-secondary) / 0.1) 50%, hsl(var(--color-primary) / 0.05) 100%);
+  }
+
+  .bg-gradient-secondary-subtle {
+    background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.03) 0%, hsl(var(--color-secondary) / 0.05) 100%);
   }
 
   .bg-gradient-secondary-card {
     background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.05) 0%, hsl(var(--color-secondary) / 0.1) 100%);
   }
 
+  /* Mixed Gradients */
   .bg-gradient-mixed {
     background: linear-gradient(135deg, hsl(var(--color-primary) / 0.1) 0%, hsl(var(--color-secondary) / 0.1) 100%);
+  }
+
+  /* ==================== BORDER STYLES ==================== */
+
+  .border-primary-subtle {
+    border-color: hsl(var(--color-primary) / 0.2);
+  }
+
+  .border-secondary-subtle {
+    border-color: hsl(var(--color-secondary) / 0.2);
+  }
+
+  .border-primary-light {
+    border-color: hsl(var(--color-primary) / 0.3);
+  }
+
+  .border-secondary-light {
+    border-color: hsl(var(--color-secondary) / 0.3);
+  }
+
+  /* ==================== BACKGROUND OVERLAYS ==================== */
+
+  .bg-primary-ultra-light {
+    background-color: hsl(var(--color-primary) / 0.05);
+  }
+
+  .bg-primary-very-light {
+    background-color: hsl(var(--color-primary) / 0.1);
+  }
+
+  .bg-secondary-ultra-light {
+    background-color: hsl(var(--color-secondary) / 0.05);
+  }
+
+  .bg-secondary-very-light {
+    background-color: hsl(var(--color-secondary) / 0.1);
+  }
+
+  .bg-secondary-ultra-light {
+    background-color: hsl(var(--color-secondary) / 0.05);
+  }
+
+  .bg-muted-light {
+    background-color: hsl(var(--color-muted) / 0.3);
+  }
+
+  .bg-destructive-light {
+    background-color: hsl(var(--color-destructive) / 0.1);
+  }
+
+  /* ==================== ICON BACKGROUND CONTAINERS ==================== */
+
+  .icon-bg-primary {
+    background-color: hsl(var(--color-primary) / 0.1);
+  }
+
+  .icon-bg-primary-light {
+    background-color: hsl(var(--color-primary) / 0.2);
+  }
+
+  .icon-bg-secondary {
+    background-color: hsl(var(--color-secondary) / 0.1);
+  }
+
+  .icon-bg-secondary-light {
+    background-color: hsl(var(--color-secondary) / 0.2);
+  }
+
+  /* ==================== CARD HEADER STYLES ==================== */
+
+  .card-header-primary {
+    border-color: hsl(var(--color-border));
+    background: linear-gradient(135deg, hsl(var(--color-primary) / 0.03) 0%, hsl(var(--color-primary) / 0.05) 100%);
+  }
+
+  .card-header-secondary {
+    border-color: hsl(var(--color-border));
+    background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.03) 0%, hsl(var(--color-secondary) / 0.05) 100%);
+  }
+
+  /* ==================== SHADOW STYLES ==================== */
+
+  .shadow-primary {
+    box-shadow: 0 4px 12px hsl(var(--color-primary) / 0.15);
+  }
+
+  .shadow-secondary {
+    box-shadow: 0 4px 12px hsl(var(--color-secondary) / 0.15);
+  }
+
+  /* ==================== STAT CARD BACKGROUNDS ==================== */
+
+  .stat-card-primary {
+    @apply bg-white border-primary-subtle;
+  }
+
+  .stat-card-secondary {
+    @apply bg-white border-secondary-subtle;
+  }
+
+  .stat-card-warning {
+    @apply bg-white;
+    border-color: hsl(38 92% 80%);
+  }
+
+  .stat-card-destructive {
+    @apply bg-white;
+    border-color: hsl(var(--color-destructive) / 0.2);
+  }
+
+  /* Warning card decorative circle and text */
+  .stat-warning-accent {
+    background-color: hsl(38 92% 90%);
+  }
+
+  .stat-warning-text {
+    color: hsl(38 92% 30%);
+  }
+
+  /* ==================== WARNING/YELLOW COLOR UTILITIES ==================== */
+
+  .bg-yellow-ultra-light {
+    background-color: hsl(38 92% 95%);
+  }
+
+  .bg-yellow-100 {
+    background-color: hsl(38 92% 90%);
+  }
+
+  .text-yellow-700 {
+    color: hsl(38 92% 30%);
+  }
+
+  .border-yellow-200 {
+    border-color: hsl(38 92% 80%);
+  }
+
+  /* ==================== DESTRUCTIVE COLOR UTILITIES ==================== */
+
+  .bg-destructive-10 {
+    background-color: hsl(var(--color-destructive) / 0.1);
+  }
+
+  .bg-destructive\/10 {
+    background-color: hsl(var(--color-destructive) / 0.1);
+  }
+
+  /* ==================== BUTTON LAYOUT FIXES ==================== */
+
+  /* Fix overlapping buttons in sticky bottom bars */
+  .sticky-action-bar {
+    @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+    z-index: 40;
+  }
+
+  /* Flex container for action buttons group */
+  .action-button-group {
+    @apply flex gap-3 flex-col sm:flex-row;
+  }
+
+  /* Individual action button - full width on mobile, auto on desktop */
+  .action-button {
+    @apply w-full sm:w-auto;
+    min-height: 2.5rem;
+    white-space: nowrap;
+  }
+
+  /* Reset button styling - order and sizing */
+  .action-button-reset {
+    @apply order-2 sm:order-1 w-full sm:w-auto;
+  }
+
+  /* Primary action buttons group */
+  .action-buttons-primary {
+    @apply order-1 flex gap-3 flex-col sm:flex-row sm:order-2 w-full sm:w-auto;
+  }
+
+  /* ==================== PRIMARY ACTION BUTTON ==================== */
+
+  .btn-primary-action {
+    background-color: hsl(var(--color-primary));
+    color: white;
+  }
+
+  .btn-primary-action:hover {
+    background-color: hsl(var(--color-primary) / 0.9);
   }
 }
 

@@ -30,11 +30,7 @@ export default function AllArticlesPage() {
           <Button
             asChild
             size="lg"
-            className="shadow-md transition-all hover:shadow-lg"
-            style={{
-              backgroundColor: 'hsl(var(--color-primary))',
-              color: 'white'
-            }}
+            className="btn-primary-action shadow-md transition-all hover:shadow-lg"
           >
             <Link href="/admin/articles/create">
               <Plus className="mr-2 h-5 w-5" />
@@ -63,11 +59,7 @@ export default function AllArticlesPage() {
           <Button
             variant="outline"
             onClick={loadMore}
-            className="shadow-sm hover:shadow-md"
-            style={{
-              borderColor: 'hsl(var(--color-primary) / 0.3)',
-              color: 'hsl(var(--color-primary))'
-            }}
+            className="border-primary-light text-primary shadow-sm hover:shadow-md"
           >
             Load More Articles
           </Button>

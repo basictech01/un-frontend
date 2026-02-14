@@ -19,9 +19,9 @@ const statusStyles: Record<string, { bg: string; text: string; border: string }>
     border: "hsl(var(--color-secondary) / 0.3)"
   },
   [ArticleStatus.REJECTED]: {
-    bg: "hsl(0 86% 97%)",
-    text: "hsl(0 84% 50%)",
-    border: "hsl(0 86% 85%)"
+    bg: "hsl(var(--color-destructive) / 0.15)",
+    text: "hsl(var(--color-destructive))",
+    border: "hsl(var(--color-destructive) / 0.3)"
   },
 };
 
@@ -38,7 +38,9 @@ interface StatusBadgeProps {
 }
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
-  const styles = statusStyles[status];
+  // Convert to uppercase to match enum values
+  const normalizedStatus = status?.toUpperCase();
+  const styles = statusStyles[normalizedStatus];
 
   return (
     <Badge
@@ -50,7 +52,7 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
         borderColor: styles.border
       } : undefined}
     >
-      {statusLabels[status] ?? status}
+      {statusLabels[normalizedStatus] ?? status}
     </Badge>
   );
 }

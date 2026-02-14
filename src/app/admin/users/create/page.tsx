@@ -40,43 +40,43 @@ export default function CreateUserPage() {
         <CardHeader className="border-b border-border bg-gradient-secondary-subtle">
           <CardTitle className="text-secondary">User Details</CardTitle>
         </CardHeader>
-        <CardContent className="pt-6">
+        <CardContent className="space-y-6 pt-6">
           <UserForm formData={formData} onChange={handleChange} />
-        </CardContent>
 
-        {/* Sticky Bottom Action Bar */}
-        <div className="sticky bottom-0 -mx-6 -mb-6 mt-8 border-t border-border bg-card px-6 py-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleReset}
-              className="order-2 border-border text-muted-foreground sm:order-1"
-              disabled={isLoading}
-            >
-              <RotateCcw className="mr-2 h-4 w-4" />
-              Reset Form
-            </Button>
+          {/* Action Buttons */}
+          <div className="border-t border-border pt-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleReset}
+                className="w-full border-border text-muted-foreground sm:w-auto"
+                disabled={isLoading}
+              >
+                <RotateCcw className="mr-2 h-4 w-4" />
+                Reset Form
+              </Button>
 
-            <Button
-              onClick={handleSubmit}
-              disabled={isLoading}
-              className="order-1 bg-secondary text-white shadow-md transition-all hover:shadow-lg sm:order-2"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Creating User...
-                </>
-              ) : (
-                <>
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  Create User
-                </>
-              )}
-            </Button>
+              <Button
+                onClick={handleSubmit}
+                disabled={isLoading}
+                className="w-full bg-secondary text-secondary-foreground shadow-md transition-all hover:shadow-lg sm:w-auto"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Creating User...
+                  </>
+                ) : (
+                  <>
+                    <UserPlus className="mr-2 h-4 w-4" />
+                    Create User
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
-        </div>
+        </CardContent>
       </Card>
     </div>
   );
