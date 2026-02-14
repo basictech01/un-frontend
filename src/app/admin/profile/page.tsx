@@ -25,11 +25,11 @@ export default function ProfilePage() {
         <div>
           <h1
             className="text-3xl font-bold tracking-tight"
-            style={{ color: "hsl(var(--color-foreground))" }}
+            className="text-foreground"
           >
             My Profile
           </h1>
-          <p style={{ color: "hsl(var(--color-muted-foreground))" }}>
+          <p className="text-muted-foreground">
             Manage your account settings and preferences
           </p>
         </div>
@@ -75,13 +75,13 @@ export default function ProfilePage() {
             <div className="text-center">
               <h3
                 className="text-lg font-semibold"
-                style={{ color: "hsl(var(--color-foreground))" }}
+                className="text-foreground"
               >
                 Admin User
               </h3>
               <p
                 className="text-sm"
-                style={{ color: "hsl(var(--color-muted-foreground))" }}
+                className="text-muted-foreground"
               >
                 admin@uttrakhandnews.com
               </p>
@@ -104,7 +104,7 @@ export default function ProfilePage() {
                 <div className="relative">
                   <UserCircle
                     className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2"
-                    style={{ color: "hsl(var(--color-muted-foreground))" }}
+                    className="text-muted-foreground"
                   />
                   <Input
                     id="name"
@@ -119,7 +119,7 @@ export default function ProfilePage() {
                 <div className="relative">
                   <Mail
                     className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2"
-                    style={{ color: "hsl(var(--color-muted-foreground))" }}
+                    className="text-muted-foreground"
                   />
                   <Input
                     id="email"
@@ -135,7 +135,7 @@ export default function ProfilePage() {
                 <div className="relative">
                   <Briefcase
                     className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2"
-                    style={{ color: "hsl(var(--color-muted-foreground))" }}
+                    className="text-muted-foreground"
                   />
                   <Input
                     id="profession"
@@ -150,7 +150,7 @@ export default function ProfilePage() {
                 <div className="relative">
                   <Shield
                     className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2"
-                    style={{ color: "hsl(var(--color-primary))" }}
+                    className="text-primary"
                   />
                   <Input
                     id="role"
@@ -211,19 +211,19 @@ export default function ProfilePage() {
               >
                 <FileText
                   className="h-6 w-6"
-                  style={{ color: "hsl(var(--color-primary))" }}
+                  className="text-primary"
                 />
               </div>
               <div>
                 <p
                   className="text-sm"
-                  style={{ color: "hsl(var(--color-muted-foreground))" }}
+                  className="text-muted-foreground"
                 >
                   Total Articles
                 </p>
                 <p
                   className="text-2xl font-bold"
-                  style={{ color: "hsl(var(--color-primary))" }}
+                  className="text-primary"
                 >
                   0
                 </p>
@@ -255,7 +255,7 @@ export default function ProfilePage() {
               <div>
                 <p
                   className="text-sm"
-                  style={{ color: "hsl(var(--color-muted-foreground))" }}
+                  className="text-muted-foreground"
                 >
                   Account Status
                 </p>
@@ -291,13 +291,13 @@ export default function ProfilePage() {
               <div>
                 <p
                   className="text-sm"
-                  style={{ color: "hsl(var(--color-muted-foreground))" }}
+                  className="text-muted-foreground"
                 >
                   Member Since
                 </p>
                 <p
                   className="text-2xl font-bold"
-                  style={{ color: "hsl(var(--color-foreground))" }}
+                  className="text-foreground"
                 >
                   January 2024
                 </p>

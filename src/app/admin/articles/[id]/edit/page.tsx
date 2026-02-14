@@ -81,45 +81,37 @@ export default function EditArticlePage({
 
       {/* Form Card */}
       <Card className="relative border-border shadow-sm">
-        <CardHeader
-          className="border-b card-header-primary"
-        >
-          <CardTitle style={{ color: 'hsl(var(--color-primary))' }}>Article Details</CardTitle>
+        <CardHeader className="border-b card-header-primary">
+          <CardTitle className="text-primary">Article Details</CardTitle>
         </CardHeader>
-        <CardContent className="pt-6">
+        <CardContent className="space-y-6 pt-6">
           <ArticleForm formData={formData} onChange={handleChange} />
-        </CardContent>
 
-        {/* Sticky Action Bar */}
-        <div
-          className="sticky bottom-0 -mx-6 -mb-6 mt-8 border-t px-6 py-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
-          style={{
-            backgroundColor: 'hsl(var(--color-card))',
-            borderColor: 'hsl(var(--color-border))'
-          }}
-        >
-          <div className="flex items-center justify-between gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => router.push(`/admin/articles/${articleId}`)}
-              disabled={isLoading}
-              className="border-border text-muted-foreground"
-            >
-              <X className="mr-2 h-4 w-4" />
-              Cancel
-            </Button>
+          {/* Action Buttons */}
+          <div className="border-t border-border pt-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => router.push(`/admin/articles/${articleId}`)}
+                disabled={isLoading}
+                className="w-full border-border text-muted-foreground sm:w-auto"
+              >
+                <X className="mr-2 h-4 w-4" />
+                Cancel
+              </Button>
 
-            <Button
-              onClick={onSubmit}
-              disabled={isLoading}
-              className="bg-primary text-primary-foreground shadow-md"
-            >
-              <Save className="mr-2 h-4 w-4" />
-              {isLoading ? 'Saving...' : 'Save Changes'}
-            </Button>
+              <Button
+                onClick={onSubmit}
+                disabled={isLoading}
+                className="w-full bg-primary text-primary-foreground shadow-md sm:w-auto"
+              >
+                <Save className="mr-2 h-4 w-4" />
+                {isLoading ? 'Saving...' : 'Save Changes'}
+              </Button>
+            </div>
           </div>
-        </div>
+        </CardContent>
       </Card>
     </div>
   );
