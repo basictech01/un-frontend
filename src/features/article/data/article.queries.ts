@@ -49,3 +49,23 @@ export const GET_ARTICLE = gql`
     }
   }
 `;
+
+export const GET_MY_ARTICLES = gql`
+  ${ARTICLE_LIST_FIELDS}
+  query GetMyArticles($first: Int, $after: String, $status: String) {
+    myArticles(first: $first, after: $after, status: $status) {
+      edges {
+        cursor
+        node {
+          ...ArticleListFields
+        }
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+      totalCount
+    }
+  }
+`;

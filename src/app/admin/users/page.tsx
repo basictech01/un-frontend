@@ -32,7 +32,7 @@ export default function UsersPage() {
           <Button
             asChild
             size="lg"
-            className="bg-secondary text-secondary-foreground shadow-md transition-all hover:shadow-lg"
+            className="btn-secondary-action shadow-md transition-all hover:shadow-lg"
           >
             <Link href="/admin/users/create">
               <Plus className="mr-2 h-5 w-5" />

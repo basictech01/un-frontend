@@ -21,7 +21,8 @@ export function useArticles(filter: ArticleFilterState) {
     articles: ArticleConnection;
   }>(GET_ARTICLES, { variables });
 
-  const articles = data?.articles.edges.map((e) => e.node) ?? [];
+  // Reverse to show latest articles first
+  const articles = data?.articles.edges.map((e) => e.node).reverse() ?? [];
   const pageInfo = data?.articles.pageInfo;
   const totalCount = data?.articles.totalCount ?? 0;
 

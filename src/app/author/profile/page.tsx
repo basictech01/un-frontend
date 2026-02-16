@@ -6,12 +6,20 @@ import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
 import { Textarea } from "@/ui/textarea";
-import { UserCircle, Mail, Briefcase, FileText, Shield } from "lucide-react";
+import { UserCircle, Mail, Briefcase, FileText, Shield, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import { useMyArticles } from "@/features/article/hooks/useMyArticles";
 import { getInitials, formatDate } from "@/lib/utils";
+import { ArticleStatus } from "@/types/enums";
 
-export default function ProfilePage() {
+export default function AuthorProfilePage() {
   const { user } = useAuth();
+  const { articles, totalCount } = useMyArticles();
+
+  const approvedCount = articles.filter(
+    (a) => a.status === ArticleStatus.APPROVED
+  ).length;
+
   const initials = user?.name ? getInitials(user.name) : "?";
 
   return (
@@ -48,8 +56,11 @@ export default function ProfilePage() {
               <h3 className="text-lg font-semibold text-foreground">
                 {user?.name}
               </h3>
-              <p className="text-sm text-muted-foreground">
-                {user?.email}
+              <p className="text-sm text-muted-foreground">{user?.email}</p>
+            </div>
+            <div className="w-full rounded-md bg-muted/50 p-3 text-center">
+              <p className="text-xs text-muted-foreground">
+                Avatar is managed by admin
               </p>
             </div>
           </CardContent>
@@ -94,7 +105,7 @@ export default function ProfilePage() {
                   <Input
                     id="profession"
                     defaultValue={user?.profession ?? ""}
-                    placeholder="e.g. Editor, Administrator"
+                    placeholder="e.g. Journalist, Writer"
                     className="pl-9"
                   />
                 </div>
@@ -106,7 +117,7 @@ export default function ProfilePage() {
                   <Shield className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary" />
                   <Input
                     id="role"
-                    defaultValue="ADMIN"
+                    defaultValue="AUTHOR"
                     disabled
                     className="pl-9 bg-primary-ultra-light text-primary"
                   />
@@ -143,12 +154,8 @@ export default function ProfilePage() {
                 <FileText className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Total Articles
-                </p>
-                <p className="text-2xl font-bold text-primary">
-                  0
-                </p>
+                <p className="text-sm text-muted-foreground">Total Articles</p>
+                <p className="text-2xl font-bold text-primary">{totalCount}</p>
               </div>
             </div>
           </CardContent>
@@ -158,14 +165,14 @@ export default function ProfilePage() {
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="rounded-lg p-3 icon-bg-secondary">
-                <Shield className="h-6 w-6 text-secondary" />
+                <CheckCircle2 className="h-6 w-6 text-secondary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">
-                  Account Status
+                  Approved Articles
                 </p>
                 <p className="text-2xl font-bold text-secondary">
-                  Active
+                  {approvedCount}
                 </p>
               </div>
             </div>
@@ -179,11 +186,11 @@ export default function ProfilePage() {
                 <UserCircle className="h-6 w-6 text-white" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Member Since
-                </p>
+                <p className="text-sm text-muted-foreground">Member Since</p>
                 <p className="text-2xl font-bold text-foreground">
-                  {user?.created_at ? formatDate(user.created_at) : "Unknown"}
+                  {user?.created_at
+                    ? formatDate(user.created_at)
+                    : "Unknown"}
                 </p>
               </div>
             </div>

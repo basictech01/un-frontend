@@ -10,24 +10,22 @@ import { Separator } from "@/ui/separator";
 import { ScrollArea } from "@/ui/scroll-area";
 import {
   FileText,
-  Clock,
-  Users,
   UserCircle,
   LogOut,
   LayoutDashboard,
   ChevronRight,
+  FilePlus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/articles", label: "All Articles", icon: FileText },
-  { href: "/admin/pending", label: "Pending Review", icon: Clock },
-  { href: "/admin/users", label: "Authors", icon: Users },
-  { href: "/admin/profile", label: "My Profile", icon: UserCircle },
+  { href: "/author", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/author/articles", label: "My Articles", icon: FileText },
+  { href: "/author/articles/create", label: "Create Article", icon: FilePlus },
+  { href: "/author/profile", label: "My Profile", icon: UserCircle },
 ];
 
-export function AdminDashboardLayout({
+export function AuthorDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -62,7 +60,7 @@ export function AdminDashboardLayout({
             </div>
             <div className="flex flex-col">
               <span className="text-base font-bold text-primary">Uttrakhand Next</span>
-              <span className="text-xs text-muted-foreground">Admin Panel</span>
+              <span className="text-xs text-muted-foreground">Author Panel</span>
             </div>
           </div>
         </div>
@@ -71,8 +69,8 @@ export function AdminDashboardLayout({
           <nav className="space-y-1">
             {navItems.map((item) => {
               const isActive =
-                item.href === "/admin"
-                  ? pathname === "/admin"
+                item.href === "/author"
+                  ? pathname === "/author"
                   : pathname.startsWith(item.href);
 
               return (
@@ -140,13 +138,13 @@ export function AdminDashboardLayout({
                 className="object-contain"
               />
             </div>
-            <span className="text-sm font-semibold">Admin</span>
+            <span className="text-sm font-semibold">Author</span>
           </div>
           <nav className="flex items-center gap-1">
-            {navItems.slice(0, 4).map((item) => {
+            {navItems.slice(0, 3).map((item) => {
               const isActive =
-                item.href === "/admin"
-                  ? pathname === "/admin"
+                item.href === "/author"
+                  ? pathname === "/author"
                   : pathname.startsWith(item.href);
 
               return (

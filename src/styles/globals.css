@@ -368,6 +368,31 @@
   .btn-primary-action:hover {
     background-color: hsl(var(--color-primary) / 0.9);
   }
+
+  /* ==================== SECONDARY ACTION BUTTON ==================== */
+
+  .btn-secondary-action {
+    background-color: hsl(var(--color-secondary));
+    color: white;
+  }
+
+  .btn-secondary-action:hover {
+    background-color: hsl(var(--color-secondary) / 0.9);
+  }
+
+  /* ==================== SIDEBAR ACTIVE NAV ==================== */
+
+  .sidebar-nav-active {
+    background-color: hsl(var(--color-primary)) !important;
+    color: white !important;
+  }
+
+  /* ==================== SIDEBAR AVATAR ==================== */
+
+  .sidebar-avatar-fallback {
+    background-color: hsl(var(--color-primary)) !important;
+    color: white !important;
+  }
 }
 
 /* ============================================

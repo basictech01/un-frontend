@@ -23,10 +23,14 @@ export function AuthGuard({ children, requiredRole }: AuthGuardProps) {
       return;
     }
 
-    // If role doesn't match, redirect to login
-    // useLogin hook will handle redirecting to the correct dashboard after login
-    if (requiredRole && user?.role !== requiredRole) {
-      router.push("/login");
+    // Normalize role comparison (case-insensitive)
+    if (requiredRole && user?.role) {
+      const normalizedUserRole = user.role.toUpperCase();
+      const normalizedRequiredRole = requiredRole.toUpperCase();
+
+      if (normalizedUserRole !== normalizedRequiredRole) {
+        router.push("/login");
+      }
     }
   }, [isLoading, isAuthenticated, user, requiredRole, router]);
 
@@ -35,7 +39,13 @@ export function AuthGuard({ children, requiredRole }: AuthGuardProps) {
   }
 
   if (!isAuthenticated) return null;
-  if (requiredRole && user?.role !== requiredRole) return null;
+
+  // Case-insensitive role check for rendering
+  if (requiredRole && user?.role) {
+    const normalizedUserRole = user.role.toUpperCase();
+    const normalizedRequiredRole = requiredRole.toUpperCase();
+    if (normalizedUserRole !== normalizedRequiredRole) return null;
+  }
 
   return <>{children}</>;
 }

@@ -13,7 +13,7 @@ export function usePendingArticles() {
   }>(GET_PENDING_ARTICLES, { variables: { first: PAGE_SIZE } });
 
   const articles = useMemo(
-    () => data?.pendingArticles.edges.map((e) => e.node) ?? [],
+    () => data?.pendingArticles.edges.map((e) => e.node).reverse() ?? [],
     [data]
   );
   const pageInfo = useMemo(

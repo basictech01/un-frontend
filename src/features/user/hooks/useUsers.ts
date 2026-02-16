@@ -21,7 +21,8 @@ export function useUsers(filter: UserFilterState) {
     users: UserConnection;
   }>(GET_USERS, { variables });
 
-  const users = data?.users.edges.map((e) => e.node) ?? [];
+  // Reverse to show latest users first
+  const users = data?.users.edges.map((e) => e.node).reverse() ?? [];
   const pageInfo = data?.users.pageInfo;
   const totalCount = data?.users.totalCount ?? 0;
 

@@ -74,8 +74,8 @@ export function useCreateUser() {
             name: formData.name.trim(),
             email: formData.email.trim().toLowerCase(),
             password: formData.password,
-            role: formData.role,
-            is_active: formData.is_active,
+            role: formData.role.toLowerCase(), // Backend expects lowercase
+            // Note: is_active is not part of SignupInput, users are active by default
           },
         },
       });
