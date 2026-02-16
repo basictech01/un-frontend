@@ -390,7 +390,18 @@ className="bg-primary text-secondary"
 
 ---
 
-## 12. Final Rule (MOST IMPORTANT)
+## 12. Loading States (Himalayan Animation)
+
+Use the brand-aligned `FullScreenLoader` and `UNLoader` components for all loading states:
+
+**Full-page loading**: `import { FullScreenLoader } from "@/components/organisms"`
+**Inline loading**: `import { UNLoader } from "@/components/organisms"`
+
+Features 3-layer parallax mountains, flowing river, pine trees, animated UN logo, and floating particles. All pure CSS for performance. Use `<FullScreenLoader message="..." />` for page transitions and `<UNLoader />` for inline sections.
+
+---
+
+## 13. Final Rule (MOST IMPORTANT)
 
 > **Meaning lives in Molecules
 > Structure lives in Organisms

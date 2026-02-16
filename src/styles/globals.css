@@ -4,41 +4,62 @@
 
 @layer base {
   :root {
-    /* Primary colors */
-    --color-primary: 220 90% 56%;
+    /* Brand Colors - Uttrakhand News */
+    --color-primary: 213 93% 44%;           /* #0A5BD3 - Primary Blue */
     --color-primary-foreground: 0 0% 100%;
 
-    /* Secondary colors */
-    --color-secondary: 220 14% 96%;
-    --color-secondary-foreground: 220 9% 46%;
+    --color-secondary: 153 59% 31%;         /* #1E7F4E - Secondary Green */
+    --color-secondary-foreground: 0 0% 100%;
 
     /* Background & Foreground */
     --color-background: 0 0% 100%;
-    --color-foreground: 220 9% 46%;
+    --color-foreground: 222 47% 11%;
 
     /* Card */
     --color-card: 0 0% 100%;
-    --color-card-foreground: 220 9% 46%;
+    --color-card-foreground: 222 47% 11%;
 
     /* Muted */
-    --color-muted: 220 14% 96%;
-    --color-muted-foreground: 220 9% 46%;
+    --color-muted: 210 40% 96%;
+    --color-muted-foreground: 215 16% 47%;
 
     /* Accent */
-    --color-accent: 220 14% 96%;
-    --color-accent-foreground: 220 9% 46%;
+    --color-accent: 210 40% 96%;
+    --color-accent-foreground: 222 47% 11%;
 
     /* Border & Input */
-    --color-border: 220 13% 91%;
-    --color-input: 220 13% 91%;
-    --color-ring: 220 90% 56%;
+    --color-border: 214 32% 91%;
+    --color-input: 214 32% 91%;
+    --color-ring: 213 93% 44%;
 
     /* Destructive */
     --color-destructive: 0 84% 60%;
     --color-destructive-foreground: 0 0% 100%;
 
+    /* Success - using secondary green variant */
+    --color-success: 153 59% 31%;
+    --color-success-foreground: 0 0% 100%;
+
+    /* Warning */
+    --color-warning: 38 92% 50%;
+    --color-warning-foreground: 0 0% 100%;
+
+    /* Info - using primary blue variant */
+    --color-info: 213 93% 44%;
+    --color-info-foreground: 0 0% 100%;
+
+    /* Sidebar */
+    --color-sidebar: 0 0% 100%;
+    --color-sidebar-foreground: 222 47% 11%;
+    --color-sidebar-primary: 213 93% 44%;
+    --color-sidebar-primary-foreground: 0 0% 100%;
+    --color-sidebar-accent: 210 40% 96%;
+    --color-sidebar-accent-foreground: 222 47% 11%;
+    --color-sidebar-border: 214 32% 91%;
+    --color-sidebar-ring: 213 93% 44%;
+
     /* Radius */
-    --radius: 0.5rem;
+    --radius: 0.625rem;
 
     /* Fonts */
     --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -46,16 +67,41 @@
   }
 
   .dark {
-    --color-background: 220 13% 9%;
-    --color-foreground: 220 9% 90%;
-    --color-card: 220 13% 13%;
-    --color-card-foreground: 220 9% 90%;
-    --color-muted: 220 13% 17%;
-    --color-muted-foreground: 220 9% 60%;
-    --color-accent: 220 13% 17%;
-    --color-accent-foreground: 220 9% 90%;
-    --color-border: 220 13% 17%;
-    --color-input: 220 13% 17%;
+    --color-background: 222 47% 11%;
+    --color-foreground: 210 40% 98%;
+
+    --color-card: 217 33% 17%;
+    --color-card-foreground: 210 40% 98%;
+
+    --color-popover: 217 33% 17%;
+    --color-popover-foreground: 210 40% 98%;
+
+    --color-primary: 213 93% 55%;
+    --color-primary-foreground: 222 47% 11%;
+
+    --color-secondary: 153 59% 40%;
+    --color-secondary-foreground: 0 0% 100%;
+
+    --color-muted: 217 33% 24%;
+    --color-muted-foreground: 215 20% 65%;
+
+    --color-accent: 217 33% 24%;
+    --color-accent-foreground: 210 40% 98%;
+
+    --color-destructive: 0 62% 60%;
+
+    --color-border: 217 33% 24%;
+    --color-input: 217 33% 24%;
+    --color-ring: 213 93% 55%;
+
+    --color-sidebar: 217 33% 17%;
+    --color-sidebar-foreground: 210 40% 98%;
+    --color-sidebar-primary: 213 93% 55%;
+    --color-sidebar-primary-foreground: 222 47% 11%;
+    --color-sidebar-accent: 217 33% 24%;
+    --color-sidebar-accent-foreground: 210 40% 98%;
+    --color-sidebar-border: 217 33% 24%;
+    --color-sidebar-ring: 213 93% 55%;
   }
 }
 
@@ -63,8 +109,668 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-size: 15px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: hsl(var(--color-muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--color-muted-foreground) / 0.3);
+    border-radius: 0.375rem;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--color-muted-foreground) / 0.5);
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES - Replace Inline Styles
+   ============================================ */
+
+@layer utilities {
+  /* Animation delays */
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  /* ==================== GRADIENT BACKGROUNDS ==================== */
+
+  /* Primary Gradients */
+  .bg-gradient-primary-soft {
+    background: linear-gradient(135deg, hsl(var(--color-primary) / 0.05) 0%, hsl(var(--color-primary) / 0.1) 50%, hsl(var(--color-secondary) / 0.05) 100%);
+  }
+
+  .bg-gradient-primary-subtle {
+    background: linear-gradient(135deg, hsl(var(--color-primary) / 0.03) 0%, hsl(var(--color-primary) / 0.05) 100%);
+  }
+
+  .bg-gradient-primary-card {
+    background: linear-gradient(135deg, hsl(var(--color-primary) / 0.05) 0%, hsl(var(--color-primary) / 0.1) 100%);
+  }
+
+  /* Secondary Gradients */
+  .bg-gradient-secondary-soft {
+    background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.05) 0%, hsl(var(--color-secondary) / 0.1) 50%, hsl(var(--color-primary) / 0.05) 100%);
+  }
+
+  .bg-gradient-secondary-subtle {
+    background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.03) 0%, hsl(var(--color-secondary) / 0.05) 100%);
+  }
+
+  .bg-gradient-secondary-card {
+    background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.05) 0%, hsl(var(--color-secondary) / 0.1) 100%);
+  }
+
+  /* Mixed Gradients */
+  .bg-gradient-mixed {
+    background: linear-gradient(135deg, hsl(var(--color-primary) / 0.1) 0%, hsl(var(--color-secondary) / 0.1) 100%);
+  }
+
+  /* ==================== BORDER STYLES ==================== */
+
+  .border-primary-subtle {
+    border-color: hsl(var(--color-primary) / 0.2);
+  }
+
+  .border-secondary-subtle {
+    border-color: hsl(var(--color-secondary) / 0.2);
+  }
+
+  .border-primary-light {
+    border-color: hsl(var(--color-primary) / 0.3);
+  }
+
+  .border-secondary-light {
+    border-color: hsl(var(--color-secondary) / 0.3);
+  }
+
+  /* ==================== BACKGROUND OVERLAYS ==================== */
+
+  .bg-primary-ultra-light {
+    background-color: hsl(var(--color-primary) / 0.05);
+  }
+
+  .bg-primary-very-light {
+    background-color: hsl(var(--color-primary) / 0.1);
+  }
+
+  .bg-secondary-ultra-light {
+    background-color: hsl(var(--color-secondary) / 0.05);
+  }
+
+  .bg-secondary-very-light {
+    background-color: hsl(var(--color-secondary) / 0.1);
+  }
+
+  .bg-secondary-ultra-light {
+    background-color: hsl(var(--color-secondary) / 0.05);
+  }
+
+  .bg-muted-light {
+    background-color: hsl(var(--color-muted) / 0.3);
+  }
+
+  .bg-destructive-light {
+    background-color: hsl(var(--color-destructive) / 0.1);
+  }
+
+  /* ==================== ICON BACKGROUND CONTAINERS ==================== */
+
+  .icon-bg-primary {
+    background-color: hsl(var(--color-primary) / 0.1);
+  }
+
+  .icon-bg-primary-light {
+    background-color: hsl(var(--color-primary) / 0.2);
+  }
+
+  .icon-bg-secondary {
+    background-color: hsl(var(--color-secondary) / 0.1);
+  }
+
+  .icon-bg-secondary-light {
+    background-color: hsl(var(--color-secondary) / 0.2);
+  }
+
+  /* ==================== CARD HEADER STYLES ==================== */
+
+  .card-header-primary {
+    border-color: hsl(var(--color-border));
+    background: linear-gradient(135deg, hsl(var(--color-primary) / 0.03) 0%, hsl(var(--color-primary) / 0.05) 100%);
+  }
+
+  .card-header-secondary {
+    border-color: hsl(var(--color-border));
+    background: linear-gradient(135deg, hsl(var(--color-secondary) / 0.03) 0%, hsl(var(--color-secondary) / 0.05) 100%);
+  }
+
+  /* ==================== SHADOW STYLES ==================== */
+
+  .shadow-primary {
+    box-shadow: 0 4px 12px hsl(var(--color-primary) / 0.15);
+  }
+
+  .shadow-secondary {
+    box-shadow: 0 4px 12px hsl(var(--color-secondary) / 0.15);
+  }
+
+  /* ==================== STAT CARD BACKGROUNDS ==================== */
+
+  .stat-card-primary {
+    @apply bg-white border-primary-subtle;
+  }
+
+  .stat-card-secondary {
+    @apply bg-white border-secondary-subtle;
+  }
+
+  .stat-card-warning {
+    @apply bg-white;
+    border-color: hsl(38 92% 80%);
+  }
+
+  .stat-card-destructive {
+    @apply bg-white;
+    border-color: hsl(var(--color-destructive) / 0.2);
+  }
+
+  /* Warning card decorative circle and text */
+  .stat-warning-accent {
+    background-color: hsl(38 92% 90%);
+  }
+
+  .stat-warning-text {
+    color: hsl(38 92% 30%);
+  }
+
+  /* ==================== WARNING/YELLOW COLOR UTILITIES ==================== */
+
+  .bg-yellow-ultra-light {
+    background-color: hsl(38 92% 95%);
+  }
+
+  .bg-yellow-100 {
+    background-color: hsl(38 92% 90%);
+  }
+
+  .text-yellow-700 {
+    color: hsl(38 92% 30%);
+  }
+
+  .border-yellow-200 {
+    border-color: hsl(38 92% 80%);
+  }
+
+  /* ==================== DESTRUCTIVE COLOR UTILITIES ==================== */
+
+  .bg-destructive-10 {
+    background-color: hsl(var(--color-destructive) / 0.1);
+  }
+
+  .bg-destructive\/10 {
+    background-color: hsl(var(--color-destructive) / 0.1);
+  }
+
+  /* ==================== BUTTON LAYOUT FIXES ==================== */
+
+  /* Fix overlapping buttons in sticky bottom bars */
+  .sticky-action-bar {
+    @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+    z-index: 40;
+  }
+
+  /* Flex container for action buttons group */
+  .action-button-group {
+    @apply flex gap-3 flex-col sm:flex-row;
+  }
+
+  /* Individual action button - full width on mobile, auto on desktop */
+  .action-button {
+    @apply w-full sm:w-auto;
+    min-height: 2.5rem;
+    white-space: nowrap;
+  }
+
+  /* Reset button styling - order and sizing */
+  .action-button-reset {
+    @apply order-2 sm:order-1 w-full sm:w-auto;
+  }
+
+  /* Primary action buttons group */
+  .action-buttons-primary {
+    @apply order-1 flex gap-3 flex-col sm:flex-row sm:order-2 w-full sm:w-auto;
+  }
+
+  /* ==================== PRIMARY ACTION BUTTON ==================== */
+
+  .btn-primary-action {
+    background-color: hsl(var(--color-primary));
+    color: white;
+  }
+
+  .btn-primary-action:hover {
+    background-color: hsl(var(--color-primary) / 0.9);
+  }
+}
+
+/* ============================================
+   UTTRAKHAND NEXT - HIMALAYAN LOADING ANIMATION
+   Modern, sophisticated loader with UN logo and mountain theme
+   ============================================ */
+
+/* Main Loader Container */
+.un-loader-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* UN Logo Animation */
+.un-logo-wrapper {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 2rem;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+.un-logo {
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 4px 12px hsl(var(--color-primary) / 0.3));
+}
+
+/* Logo breathing effect */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 4px 12px hsl(var(--color-primary) / 0.3));
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+    filter: drop-shadow(0 8px 24px hsl(var(--color-primary) / 0.5));
+  }
+}
+
+/* Loading Text */
+.un-loading-text {
+  position: relative;
+  z-index: 10;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--color-muted-foreground));
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  animation: textPulse 2s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Progress Bar */
+.un-progress-bar {
+  position: relative;
+  width: 200px;
+  height: 3px;
+  background: hsl(var(--color-muted));
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 10;
+  margin-bottom: 2rem;
+}
+
+.un-progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--color-primary)),
+    hsl(var(--color-secondary)),
+    hsl(var(--color-primary))
+  );
+  background-size: 200% 100%;
+  animation: progressFlow 2s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+@keyframes progressFlow {
+  0% {
+    transform: translateX(-100%);
+    background-position: 0% 50%;
+  }
+  100% {
+    transform: translateX(100%);
+    background-position: 100% 50%;
+  }
+}
+
+/* Himalayan Mountain Layers (Parallax Effect) */
+.un-mountains-scene {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 160px;
+  pointer-events: none;
+}
+
+/* Mountain Layer 1 - Far Background */
+.un-mountain-layer-1 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  animation: mountainParallax1 20s ease-in-out infinite;
+}
+
+.un-mountain-layer-1 .un-peak {
+  position: absolute;
+  bottom: 0;
+}
+
+.un-mountain-layer-1 .un-peak-1 {
+  left: 10%;
+  width: 0;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 100px solid hsl(var(--color-primary));
+  filter: blur(2px);
+}
+
+.un-mountain-layer-1 .un-peak-2 {
+  right: 15%;
+  width: 0;
+  height: 0;
+  border-left: 90px solid transparent;
+  border-right: 90px solid transparent;
+  border-bottom: 110px solid hsl(var(--color-primary));
+  filter: blur(2px);
+}
+
+/* Mountain Layer 2 - Middle Ground */
+.un-mountain-layer-2 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  animation: mountainParallax2 15s ease-in-out infinite;
+}
+
+.un-mountain-layer-2 .un-peak {
+  position: absolute;
+  bottom: 0;
+}
+
+.un-mountain-layer-2 .un-peak-1 {
+  left: 20%;
+  width: 0;
+  height: 0;
+  border-left: 70px solid transparent;
+  border-right: 70px solid transparent;
+  border-bottom: 120px solid hsl(var(--color-secondary));
+  filter: blur(1px);
+}
+
+.un-mountain-layer-2 .un-peak-2 {
+  right: 25%;
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 90px solid hsl(var(--color-secondary));
+  filter: blur(1px);
+}
+
+/* Mountain Layer 3 - Foreground */
+.un-mountain-layer-3 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  animation: mountainParallax3 12s ease-in-out infinite;
+}
+
+.un-mountain-layer-3 .un-peak {
+  position: absolute;
+  bottom: 0;
+}
+
+.un-mountain-layer-3 .un-peak-1 {
+  left: 30%;
+  width: 0;
+  height: 0;
+  border-left: 65px solid transparent;
+  border-right: 65px solid transparent;
+  border-bottom: 130px solid hsl(var(--color-primary));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+.un-mountain-layer-3 .un-peak-2 {
+  right: 35%;
+  width: 0;
+  height: 0;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-bottom: 100px solid hsl(var(--color-secondary));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+/* Snow Caps on Mountains */
+.un-snow-cap {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid hsl(var(--color-background));
+  filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.8));
+}
+
+/* Parallax Animations */
+@keyframes mountainParallax1 {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes mountainParallax2 {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes mountainParallax3 {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-30px);
+  }
+}
+
+/* Pine Trees (Foreground) */
+.un-tree {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  animation: treeGentle 4s ease-in-out infinite;
+}
+
+.un-tree-1 {
+  left: 15%;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 35px solid hsl(var(--color-secondary));
+  opacity: 0.7;
+  animation-delay: 0s;
+}
+
+.un-tree-2 {
+  right: 20%;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 42px solid hsl(var(--color-secondary));
+  opacity: 0.8;
+  animation-delay: -1s;
+}
+
+.un-tree-3 {
+  left: 60%;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 30px solid hsl(var(--color-secondary));
+  opacity: 0.6;
+  animation-delay: -2s;
+}
+
+@keyframes treeGentle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+/* Flowing River/Stream Effect */
+.un-river {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--color-primary) / 0.1) 25%,
+    hsl(var(--color-primary) / 0.2) 50%,
+    hsl(var(--color-primary) / 0.1) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: riverFlow 4s linear infinite;
+  z-index: 5;
+}
+
+@keyframes riverFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Floating Particles (Snow/Mist) */
+.un-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: hsl(var(--color-background));
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: particleFloat 8s ease-in-out infinite;
+}
+
+.un-particle-1 {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.un-particle-2 {
+  top: 40%;
+  right: 15%;
+  animation-delay: -2s;
+}
+
+.un-particle-3 {
+  top: 60%;
+  left: 70%;
+  animation-delay: -4s;
+}
+
+.un-particle-4 {
+  top: 30%;
+  left: 50%;
+  animation-delay: -6s;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(200px) translateX(30px);
+    opacity: 0;
+  }
+}
+
+/* Tagline Reveal Animation */
+.un-tagline {
+  position: relative;
+  z-index: 10;
+  font-size: 0.75rem;
+  color: hsl(var(--color-muted-foreground));
+  text-align: center;
+  letter-spacing: 0.05em;
+  animation: taglineFade 3s ease-in-out infinite;
+  font-style: italic;
+}
+
+@keyframes taglineFade {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
   }
 }
