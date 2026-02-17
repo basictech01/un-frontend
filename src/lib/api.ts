@@ -64,7 +64,7 @@ export const apiClient = {
       }
 
       const data = await response.json();
-      return { url: data.url };
+      return { url: data.data.url };
     } catch (error: any) {
       if (error instanceof ApiError) {
         throw error;

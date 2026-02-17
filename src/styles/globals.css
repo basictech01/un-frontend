@@ -380,6 +380,16 @@
     background-color: hsl(var(--color-secondary) / 0.9);
   }
 
+  /* ==================== PUBLIC HOME PAGE ==================== */
+
+  .hero-gradient {
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.3) 50%, transparent 100%);
+  }
+
+  .universe-card-hover {
+    @apply transition-all duration-500 hover:shadow-xl hover:-translate-y-1;
+  }
+
   /* ==================== SIDEBAR ACTIVE NAV ==================== */
 
   .sidebar-nav-active {

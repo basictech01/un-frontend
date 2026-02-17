@@ -6,21 +6,13 @@ import { ArrowLeft, Loader2, Save, Send, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import { ArticleForm } from "@/features/article/ui/molecules/ArticleForm";
 import { useCreateArticle } from "@/features/article/hooks/useCreateArticle";
-import { ArticleStatus } from "@/types/enums";
 
 export default function AuthorCreateArticlePage() {
   const { formData, handleChange, handleSubmit, handleReset, isLoading } =
     useCreateArticle("/author/articles");
 
-  const handleSaveDraft = () => {
-    handleChange("status", ArticleStatus.DRAFT);
-    setTimeout(() => handleSubmit(), 0);
-  };
-
-  const handleSubmitForReview = () => {
-    handleChange("status", ArticleStatus.PENDING);
-    setTimeout(() => handleSubmit(), 0);
-  };
+  const handleSaveDraft = () => handleSubmit(false);
+  const handleSubmitForReview = () => handleSubmit(true);
 
   return (
     <div className="space-y-6 pb-24">
@@ -76,17 +68,8 @@ export default function AuthorCreateArticlePage() {
                   disabled={isLoading}
                   className="w-full border border-gray-300 bg-gray-100 text-gray-700 shadow-sm hover:bg-gray-200 sm:w-auto"
                 >
-                  {isLoading && formData.status === ArticleStatus.DRAFT ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Saving...
-                    </>
-                  ) : (
-                    <>
-                      <Save className="mr-2 h-4 w-4" />
-                      Save as Draft
-                    </>
-                  )}
+                  <Save className="mr-2 h-4 w-4" />
+                  Save as Draft
                 </Button>
 
                 <Button
@@ -94,7 +77,7 @@ export default function AuthorCreateArticlePage() {
                   disabled={isLoading}
                   className="btn-primary-action w-full shadow-md transition-all hover:shadow-lg sm:w-auto"
                 >
-                  {isLoading && formData.status === ArticleStatus.PENDING ? (
+                  {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Submitting...

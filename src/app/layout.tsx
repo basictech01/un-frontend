@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "@/styles/globals.css";
 import { ApolloProvider } from "@/providers/ApolloProvider";
 import { AuthProvider } from "@/features/auth/hooks/useAuth";
 import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+});
 
 export const metadata: Metadata = {
-  title: "Uttrakhand News - Admin Panel",
-  description: "Editorial platform for Uttrakhand news and articles",
+  title: "Uttrakhand Next | Empower Future, Inspire Generations",
+  description: "Premium digital platform documenting the socio-economic and cultural evolution of the Himalayan state of Uttarakhand.",
 };
 
 export default function RootLayout({
@@ -20,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} font-sans antialiased`}
+        className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
         <ApolloProvider>
