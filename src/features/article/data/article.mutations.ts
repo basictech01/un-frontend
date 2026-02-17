@@ -57,3 +57,21 @@ export const BULK_DELETE_ARTICLES = gql`
     bulkDeleteArticles(ids: $ids)
   }
 `;
+
+export const SUBMIT_ARTICLE = gql`
+  ${ARTICLE_FIELDS}
+  mutation SubmitArticle($id: Int!) {
+    submitArticle(id: $id) {
+      ...ArticleFields
+    }
+  }
+`;
+
+export const RESUBMIT_ARTICLE = gql`
+  ${ARTICLE_FIELDS}
+  mutation ResubmitArticle($id: Int!) {
+    resubmitArticle(id: $id) {
+      ...ArticleFields
+    }
+  }
+`;

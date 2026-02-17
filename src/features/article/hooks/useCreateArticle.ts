@@ -11,7 +11,7 @@ import { initialArticleForm } from "../types";
 import type { Article } from "@/types/common";
 import { apiClient } from "@/lib/api";
 
-export function useCreateArticle() {
+export function useCreateArticle(redirectPath: string = "/admin") {
   const router = useRouter();
   const [formData, setFormData] = useState<ArticleFormState>(initialArticleForm);
 
@@ -71,7 +71,7 @@ export function useCreateArticle() {
         },
       });
       toast.success("Article created successfully");
-      router.push("/admin");
+      router.push(redirectPath);
     } catch (error) {
       const message =
         error instanceof Error ? error.message : "Failed to create article";

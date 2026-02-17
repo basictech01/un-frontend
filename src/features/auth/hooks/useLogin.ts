@@ -17,13 +17,20 @@ export function useLogin() {
       const user = await login(email, password);
       toast.success(`Welcome back, ${user.name}!`);
 
-      // Redirect based on role
-      if (user.role === UserRole.ADMIN) {
+      // Normalize role to uppercase for comparison
+      const normalizedRole = user.role?.toUpperCase();
+
+      // Small delay to ensure auth state propagates
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Redirect based on role (case-insensitive)
+      if (normalizedRole === "ADMIN" || normalizedRole === UserRole.ADMIN) {
         router.push("/admin");
-      } else if (user.role === UserRole.AUTHOR) {
+      } else if (normalizedRole === "AUTHOR" || normalizedRole === UserRole.AUTHOR) {
         router.push("/author");
       } else {
-        router.push("/");
+        // Fallback to /admin instead of non-existent home page
+        router.push("/admin");
       }
     } catch (error) {
       const message =

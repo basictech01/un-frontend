@@ -11,6 +11,15 @@ interface AuthGuardProps {
   requiredRole?: UserRole;
 }
 
+function getDashboardForRole(role: string): string {
+  const normalized = role.toUpperCase();
+  if (normalized === UserRole.ADMIN) return "/admin";
+  if (normalized === UserRole.AUTHOR) return "/author";
+  // TODO: When the public website is built, unauthenticated users will land
+  // on the home page instead of being redirected to /login.
+  return "/admin";
+}
+
 export function AuthGuard({ children, requiredRole }: AuthGuardProps) {
   const { user, isLoading, isAuthenticated } = useAuth();
   const router = useRouter();
@@ -19,14 +28,20 @@ export function AuthGuard({ children, requiredRole }: AuthGuardProps) {
     if (isLoading) return;
 
     if (!isAuthenticated) {
-      router.push("/login");
+      // TODO: In future, unauthenticated users will see the public website
+      // home page here instead of being redirected to /login.
+      router.replace("/login");
       return;
     }
 
-    // If role doesn't match, redirect to login
-    // useLogin hook will handle redirecting to the correct dashboard after login
-    if (requiredRole && user?.role !== requiredRole) {
-      router.push("/login");
+    if (requiredRole && user?.role) {
+      const normalizedUserRole = user.role.toUpperCase();
+      const normalizedRequiredRole = requiredRole.toUpperCase();
+
+      if (normalizedUserRole !== normalizedRequiredRole) {
+        // Redirect to the user's correct dashboard instead of login
+        router.replace(getDashboardForRole(normalizedUserRole));
+      }
     }
   }, [isLoading, isAuthenticated, user, requiredRole, router]);
 
@@ -35,7 +50,12 @@ export function AuthGuard({ children, requiredRole }: AuthGuardProps) {
   }
 
   if (!isAuthenticated) return null;
-  if (requiredRole && user?.role !== requiredRole) return null;
+
+  if (requiredRole && user?.role) {
+    const normalizedUserRole = user.role.toUpperCase();
+    const normalizedRequiredRole = requiredRole.toUpperCase();
+    if (normalizedUserRole !== normalizedRequiredRole) return null;
+  }
 
   return <>{children}</>;
 }

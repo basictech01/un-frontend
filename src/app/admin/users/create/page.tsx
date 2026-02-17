@@ -60,7 +60,7 @@ export default function CreateUserPage() {
               <Button
                 onClick={handleSubmit}
                 disabled={isLoading}
-                className="w-full bg-secondary text-secondary-foreground shadow-md transition-all hover:shadow-lg sm:w-auto"
+                className="btn-primary-action w-full shadow-md transition-all hover:shadow-lg sm:w-auto"
               >
                 {isLoading ? (
                   <>

@@ -1,7 +1,7 @@
 import imageCompression from "browser-image-compression";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 export class ApiError extends Error {
   code: number;
@@ -45,7 +45,7 @@ export const apiClient = {
       }
 
       // Upload to backend
-      const url = `${API_BASE_URL}/upload`;
+      const url = `${API_BASE_URL}/api/upload`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
