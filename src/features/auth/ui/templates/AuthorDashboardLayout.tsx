@@ -14,14 +14,12 @@ import {
   LogOut,
   LayoutDashboard,
   ChevronRight,
-  FilePlus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/author", label: "Dashboard", icon: LayoutDashboard },
   { href: "/author/articles", label: "My Articles", icon: FileText },
-  { href: "/author/articles/create", label: "Create Article", icon: FilePlus },
   { href: "/author/profile", label: "My Profile", icon: UserCircle },
 ];
 
