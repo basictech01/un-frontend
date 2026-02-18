@@ -26,17 +26,13 @@ export function PublicFooter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
           {/* Brand */}
           <div className="space-y-8">
-            <div className="flex items-center gap-3">
-              <div className="rounded-xl bg-white p-1 shrink-0 overflow-hidden">
-                <Image
-                  src="/logo/image.png"
-                  alt="Uttrakhand Next"
-                  width={36}
-                  height={36}
-                  className="object-contain"
-                />
-              </div>
-              <span className="font-display font-bold text-2xl">UN</span>
+            <div className="leading-none">
+              <span className="block font-display font-black text-xl tracking-tight text-white">
+                UN
+              </span>
+              <span className="text-[9px] uppercase tracking-[0.2em] text-slate-300 font-bold">
+                Uttarakhand Next
+              </span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               Uttarakhand Next is a premium digital platform documenting the

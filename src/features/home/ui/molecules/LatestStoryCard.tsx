@@ -20,21 +20,23 @@ export function LatestStoryCard({ article }: LatestStoryCardProps) {
           alt={article.title}
           width={80}
           height={96}
-          className="object-cover"
+          className="object-cover w-20 h-24"
         />
       </div>
 
-      <div className="flex-grow pt-1">
-        <h4 className="text-sm font-bold text-slate-900 leading-snug group-hover:text-primary transition-colors mb-2 line-clamp-3">
-          {article.title}
-        </h4>
-        <Badge
-          variant="outline"
-          className="text-xs font-bold text-slate-500 border-slate-200 tracking-wider uppercase rounded-full px-2 py-0.5"
-        >
-          {sectionLabel}
-        </Badge>
-        <span className="text-xs text-slate-400 mt-1 block">
+      <div className="flex-grow flex flex-col justify-between">
+        <div>
+          <h4 className="text-sm font-bold text-slate-900 leading-snug group-hover:text-primary transition-colors mb-2 line-clamp-3">
+            {article.title}
+          </h4>
+          <Badge
+            variant="outline"
+            className="text-xs font-bold text-slate-500 border-slate-200 tracking-wider uppercase rounded-full px-2 py-0.5"
+          >
+            {sectionLabel}
+          </Badge>
+        </div>
+        <span className="text-xs text-slate-400">
           {formatDate(article.published_at ?? article.created_at)}
         </span>
       </div>
