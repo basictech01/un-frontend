@@ -368,14 +368,15 @@ className="bg-primary text-secondary"
 
 Always use Tailwind's standard text scale. Never use arbitrary pixel values.
 
-| Instead of       | Use         |
-| ---------------- | ----------- |
-| `text-[9px]`     | `text-xs`   |
-| `text-[10px]`    | `text-xs`   |
-| `text-[11px]`    | `text-xs`   |
-| `text-[13px]`    | `text-sm`   |
-| `text-[14px]`    | `text-sm`   |
-| `text-[15px]`    | `text-sm`   |
+| Instead of       | Use         | Tailwind (px) |
+| ---------------- | ----------- | ------------- |
+| `text-[9px]`     | `text-xs`   | 12px          |
+| `text-[10px]`    | `text-xs`   | 12px          |
+| `text-[11px]`    | `text-xs`   | 12px          |
+| `text-[13px]`    | `text-sm`   | 14px          |
+| `text-[14px]`    | `text-sm`   | 14px          |
+| `text-[15px]`    | `text-base` | 16px          |
+| `text-[17px]`    | `text-lg`   | 18px          |
 
 ```tsx
 // ❌ Wrong
