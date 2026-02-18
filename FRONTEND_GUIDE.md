@@ -374,6 +374,7 @@ Always use Tailwind's standard text scale. Never use arbitrary pixel values.
 | `text-[10px]`    | `text-xs`   |
 | `text-[11px]`    | `text-xs`   |
 | `text-[13px]`    | `text-sm`   |
+| `text-[14px]`    | `text-sm`   |
 | `text-[15px]`    | `text-sm`   |
 
 ```tsx

@@ -25,7 +25,7 @@ export function LatestStoryCard({ article }: LatestStoryCardProps) {
       </div>
 
       <div className="flex-grow pt-1">
-        <h4 className="text-[13px] font-bold text-slate-900 leading-snug group-hover:text-primary transition-colors mb-2 line-clamp-3">
+        <h4 className="text-sm font-bold text-slate-900 leading-snug group-hover:text-primary transition-colors mb-2 line-clamp-3">
           {article.title}
         </h4>
         <Badge
@@ -34,7 +34,7 @@ export function LatestStoryCard({ article }: LatestStoryCardProps) {
         >
           {sectionLabel}
         </Badge>
-        <span className="text-[10px] text-slate-400 mt-1 block">
+        <span className="text-xs text-slate-400 mt-1 block">
           {formatDate(article.published_at ?? article.created_at)}
         </span>
       </div>

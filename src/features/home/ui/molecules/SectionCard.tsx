@@ -75,7 +75,7 @@ export function SectionCard({ sectionKey, article }: SectionCardProps) {
       <div className="p-6">
         <div className="flex items-center justify-between mb-3">
           <span
-            className={`text-[10px] font-black uppercase tracking-[0.2em] ${labelClass}`}
+            className={`text-xs font-black uppercase tracking-[0.2em] ${labelClass}`}
           >
             {section.label}
           </span>

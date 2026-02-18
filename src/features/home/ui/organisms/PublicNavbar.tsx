@@ -22,12 +22,12 @@ export function PublicNavbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="relative h-10 w-10 shrink-0">
+            <div className="relative h-12 w-12 shrink-0">
               <Image
                 src="/logo/image.png"
                 alt="Uttrakhand Next"
                 fill
-                sizes="40px"
+                sizes="48px"
                 className="object-contain"
               />
             </div>
