@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Badge } from "@/ui/badge";
 import { SECTIONS } from "@/types/enums";
 import type { LatestStoryCardProps } from "@/types/public";
+import { formatDate } from "@/lib/utils";
 
 export function LatestStoryCard({ article }: LatestStoryCardProps) {
   const section = SECTIONS[article.section as keyof typeof SECTIONS];
@@ -13,18 +14,14 @@ export function LatestStoryCard({ article }: LatestStoryCardProps) {
       href={`/articles/${article.id}`}
       className="flex gap-4 group cursor-pointer items-start"
     >
-      <div className="w-20 h-24 shrink-0 rounded-lg overflow-hidden bg-slate-100 relative">
-        {article.cover_image ? (
-          <Image
-            src={article.cover_image}
-            alt={article.title}
-            fill
-            className="object-cover"
-            sizes="80px"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-primary-soft" />
-        )}
+      <div className="shrink-0 rounded-lg overflow-hidden bg-slate-100">
+        <Image
+          src={article.cover_image ?? `https://picsum.photos/seed/${article.id}/80/96`}
+          alt={article.title}
+          width={80}
+          height={96}
+          className="object-cover"
+        />
       </div>
 
       <div className="flex-grow pt-1">
@@ -33,10 +30,13 @@ export function LatestStoryCard({ article }: LatestStoryCardProps) {
         </h4>
         <Badge
           variant="outline"
-          className="text-[9px] font-bold text-slate-500 border-slate-200 tracking-wider uppercase rounded-full px-2 py-0.5"
+          className="text-xs font-bold text-slate-500 border-slate-200 tracking-wider uppercase rounded-full px-2 py-0.5"
         >
           {sectionLabel}
         </Badge>
+        <span className="text-[10px] text-slate-400 mt-1 block">
+          {formatDate(article.published_at ?? article.created_at)}
+        </span>
       </div>
     </Link>
   );

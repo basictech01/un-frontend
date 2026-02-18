@@ -21,7 +21,7 @@ export function PublicNavbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center group">
             <div className="relative h-10 w-10 shrink-0">
               <Image
                 src="/logo/image.png"
@@ -31,14 +31,6 @@ export function PublicNavbar() {
                 className="object-contain"
               />
             </div>
-            <div className="leading-none hidden sm:block">
-              <span className="block font-display font-black text-xl tracking-tight text-slate-900">
-                UN
-              </span>
-              <span className="text-[9px] uppercase tracking-[0.2em] text-slate-500 font-bold">
-                Uttarakhand Next
-              </span>
-            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -47,7 +39,7 @@ export function PublicNavbar() {
               <Link
                 key={s.key}
                 href={`/section/${s.key.toLowerCase()}`}
-                className="text-[11px] font-bold uppercase tracking-wider text-slate-600 hover:text-primary transition-colors"
+                className="text-xs font-bold uppercase tracking-wider text-slate-600 hover:text-primary transition-colors"
               >
                 {s.label}
               </Link>
@@ -114,7 +106,7 @@ export function PublicNavbar() {
                 <Link
                   key={s.key}
                   href={`/section/${s.key.toLowerCase()}`}
-                  className="text-[11px] font-bold uppercase tracking-wider text-slate-600 hover:text-primary transition-colors py-2 px-2 rounded-lg hover:bg-slate-100"
+                  className="text-xs font-bold uppercase tracking-wider text-slate-600 hover:text-primary transition-colors py-2 px-2 rounded-lg hover:bg-slate-100"
                   onClick={() => setMenuOpen(false)}
                 >
                   {s.label}

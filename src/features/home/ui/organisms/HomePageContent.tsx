@@ -10,7 +10,7 @@ import { LatestStoriesSidebar } from "../molecules/LatestStoriesSidebar";
 export function HomePageContent() {
   const { articles, loading } = usePublishedArticles();
 
-  const featuredArticle = articles[0] as (typeof articles)[0] | undefined;
+  const featuredArticle = articles.at(0);
 
   const articlesBySection = useMemo(() => {
     const map: ArticlesBySection = {};

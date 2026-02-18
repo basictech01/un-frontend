@@ -364,6 +364,78 @@ Use:
 className="bg-primary text-secondary"
 ```
 
+### 9.3 Text Size Scale (NO ARBITRARY SIZES)
+
+Always use Tailwind's standard text scale. Never use arbitrary pixel values.
+
+| Instead of       | Use         |
+| ---------------- | ----------- |
+| `text-[9px]`     | `text-xs`   |
+| `text-[10px]`    | `text-xs`   |
+| `text-[11px]`    | `text-xs`   |
+| `text-[13px]`    | `text-sm`   |
+| `text-[15px]`    | `text-sm`   |
+
+```tsx
+// ❌ Wrong
+<p className="text-[11px]">...</p>
+
+// ✅ Correct
+<p className="text-xs">...</p>
+```
+
+### 9.4 Responsive Units
+
+* ❌ Never use `px` for `min-height` on full-section containers
+* ✅ Use viewport units so it scales across screen sizes
+
+```tsx
+// ❌ Wrong — breaks on small screens
+className="h-[82vh] min-h-[600px]"
+
+// ✅ Correct
+className="h-[82vh] min-h-[60vh]"
+```
+
+---
+
+## 14. Image Rules (`next/image`)
+
+### 14.1 `fill` vs explicit `width`/`height` — pick ONE
+
+Never provide both a sized parent container AND explicit `width`/`height` on the Image.
+
+**Use `fill`** when the image must fill a shaped container (aspect-ratio boxes, hero banners):
+```tsx
+// Parent MUST have `relative` + explicit dimensions
+<div className="relative w-full aspect-[16/10] overflow-hidden">
+  <Image src={src} alt={alt} fill className="object-cover" sizes="..." />
+</div>
+```
+
+**Use `width`/`height`** for fixed-size images (avatars, thumbnails, logos):
+```tsx
+// No explicit sizing needed on the parent div
+<div className="rounded-lg overflow-hidden">
+  <Image src={src} alt={alt} width={80} height={96} className="object-cover" />
+</div>
+```
+
+### 14.2 `sizes` prop
+
+Always set `sizes` when using `fill` to help the browser pick the right source:
+```tsx
+sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+```
+Not needed when using explicit `width`/`height`.
+
+### 14.3 Placeholder / fallback images
+
+For content that may not have an image yet, use picsum with a stable seed so the image is consistent per item:
+```tsx
+src={article.cover_image ?? `https://picsum.photos/seed/${article.id}/800/500`}
+```
+
 ---
 
 ## 10. Decision Cheatsheet (PRINT THIS)
@@ -386,7 +458,12 @@ className="bg-primary text-secondary"
 ❌ Hardcoded colors
 ❌ Business logic in pages
 ❌ Duplicate admin/author UI
-❌ Giant “components” folder
+❌ Giant "components" folder
+❌ Arbitrary text sizes (`text-[11px]`, `text-[13px]`) — use the Tailwind scale
+❌ `px` values for responsive min-height — use `vh`
+❌ Both `fill` AND explicit `width`/`height` on `next/image` — pick one
+❌ `array[0] as T | undefined` — use `array.at(0)`
+❌ Returning `null`/`undefined` arrays from hooks — always `?? []`
 
 ---
 
@@ -398,6 +475,33 @@ Use the brand-aligned `FullScreenLoader` and `UNLoader` components for all loadi
 **Inline loading**: `import { UNLoader } from "@/components/organisms"`
 
 Features 3-layer parallax mountains, flowing river, pine trees, animated UN logo, and floating particles. All pure CSS for performance. Use `<FullScreenLoader message="..." />` for page transitions and `<UNLoader />` for inline sections.
+
+---
+
+## 15. TypeScript Patterns
+
+### 15.1 Safe array access
+
+Use `.at(0)` instead of index `[0]` when the element may not exist. `.at()` natively returns `T | undefined`; index access does not without `noUncheckedIndexedAccess`.
+
+```ts
+// ❌ Wrong — TypeScript thinks this is always Article, not Article | undefined
+const featured = articles[0] as (typeof articles)[0] | undefined;
+
+// ✅ Correct — type is Article | undefined with no cast
+const featured = articles.at(0);
+```
+
+### 15.2 Loading state contract for hooks
+
+Every data hook must guarantee a safe empty state so components never receive `null` or `undefined` arrays. Use `?? []` as the fallback:
+
+```ts
+const articles = data?.articles.edges.map((e) => e.node) ?? [];
+return { articles, loading, error };
+```
+
+Components then check `loading` for skeleton display and work with a guaranteed array — they never need to null-check.
 
 ---
 

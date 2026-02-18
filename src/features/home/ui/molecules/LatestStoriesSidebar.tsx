@@ -11,7 +11,7 @@ export function LatestStoriesSidebar({
   return (
     <aside className="flex flex-col h-full">
       <div className="mb-6">
-        <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
+        <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">
           Latest Stories
         </h3>
       </div>

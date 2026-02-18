@@ -21,13 +21,13 @@ export function PublicFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 text-white pt-24 pb-12">
+    <footer className="bg-primary text-white pt-24 pb-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
           {/* Brand */}
           <div className="space-y-8">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white p-1 shrink-0 flex items-center justify-center overflow-hidden">
+              <div className="rounded-xl bg-white p-1 shrink-0 overflow-hidden">
                 <Image
                   src="/logo/image.png"
                   alt="Uttrakhand Next"
@@ -46,10 +46,10 @@ export function PublicFooter() {
 
           {/* Universes */}
           <div>
-            <h4 className="text-[10px] font-black uppercase tracking-widest mb-10 text-slate-500">
+            <h4 className="text-xs font-black uppercase tracking-widest mb-10 text-slate-500">
               Universes
             </h4>
-            <ul className="space-y-4 text-slate-300 text-[13px] font-medium">
+            <ul className="space-y-4 text-slate-300 text-sm font-medium">
               {UNIVERSE_LINKS.map((link) => (
                 <li key={link.key}>
                   <Link
@@ -65,10 +65,10 @@ export function PublicFooter() {
 
           {/* Company */}
           <div>
-            <h4 className="text-[10px] font-black uppercase tracking-widest mb-10 text-slate-500">
+            <h4 className="text-xs font-black uppercase tracking-widest mb-10 text-slate-500">
               Company
             </h4>
-            <ul className="space-y-4 text-slate-300 text-[13px] font-medium">
+            <ul className="space-y-4 text-slate-300 text-sm font-medium">
               {COMPANY_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -84,7 +84,7 @@ export function PublicFooter() {
 
           {/* Connect */}
           <div>
-            <h4 className="text-[10px] font-black uppercase tracking-widest mb-10 text-slate-500">
+            <h4 className="text-xs font-black uppercase tracking-widest mb-10 text-slate-500">
               Connect
             </h4>
             <div className="flex gap-4">
@@ -150,7 +150,7 @@ export function PublicFooter() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+        <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-xs font-bold uppercase tracking-widest">
           <p>© {currentYear} Uttarakhand Next. All rights reserved.</p>
           <div className="flex gap-10">
             <Link href="/privacy-policy" className="hover:text-white transition-colors">

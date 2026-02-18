@@ -5,10 +5,10 @@
 @layer base {
   :root {
     /* Brand Colors - Uttrakhand News */
-    --color-primary: 213 93% 44%;           /* #0A5BD3 - Primary Blue */
+    --color-primary: 217 37% 28%;           /* #2D4263 - Slate Blue (logo) */
     --color-primary-foreground: 0 0% 100%;
 
-    --color-secondary: 153 59% 31%;         /* #1E7F4E - Secondary Green */
+    --color-secondary: 143 49% 20%;         /* #1A4D2E - Forest Green (logo) */
     --color-secondary-foreground: 0 0% 100%;
 
     /* Background & Foreground */
@@ -30,14 +30,14 @@
     /* Border & Input */
     --color-border: 214 32% 91%;
     --color-input: 214 32% 91%;
-    --color-ring: 213 93% 44%;
+    --color-ring: 217 37% 28%;
 
     /* Destructive */
     --color-destructive: 0 84% 60%;
     --color-destructive-foreground: 0 0% 100%;
 
     /* Success - using secondary green variant */
-    --color-success: 153 59% 31%;
+    --color-success: 143 49% 20%;
     --color-success-foreground: 0 0% 100%;
 
     /* Warning */
@@ -45,18 +45,18 @@
     --color-warning-foreground: 0 0% 100%;
 
     /* Info - using primary blue variant */
-    --color-info: 213 93% 44%;
+    --color-info: 217 37% 28%;
     --color-info-foreground: 0 0% 100%;
 
     /* Sidebar */
     --color-sidebar: 0 0% 100%;
     --color-sidebar-foreground: 222 47% 11%;
-    --color-sidebar-primary: 213 93% 44%;
+    --color-sidebar-primary: 217 37% 28%;
     --color-sidebar-primary-foreground: 0 0% 100%;
     --color-sidebar-accent: 210 40% 96%;
     --color-sidebar-accent-foreground: 222 47% 11%;
     --color-sidebar-border: 214 32% 91%;
-    --color-sidebar-ring: 213 93% 44%;
+    --color-sidebar-ring: 217 37% 28%;
 
     /* Radius */
     --radius: 0.625rem;
@@ -76,10 +76,10 @@
     --color-popover: 217 33% 17%;
     --color-popover-foreground: 210 40% 98%;
 
-    --color-primary: 213 93% 55%;
-    --color-primary-foreground: 222 47% 11%;
+    --color-primary: 217 37% 42%;
+    --color-primary-foreground: 0 0% 100%;
 
-    --color-secondary: 153 59% 40%;
+    --color-secondary: 143 49% 33%;
     --color-secondary-foreground: 0 0% 100%;
 
     --color-muted: 217 33% 24%;
@@ -92,16 +92,16 @@
 
     --color-border: 217 33% 24%;
     --color-input: 217 33% 24%;
-    --color-ring: 213 93% 55%;
+    --color-ring: 217 37% 42%;
 
     --color-sidebar: 217 33% 17%;
     --color-sidebar-foreground: 210 40% 98%;
-    --color-sidebar-primary: 213 93% 55%;
-    --color-sidebar-primary-foreground: 222 47% 11%;
+    --color-sidebar-primary: 217 37% 42%;
+    --color-sidebar-primary-foreground: 0 0% 100%;
     --color-sidebar-accent: 217 33% 24%;
     --color-sidebar-accent-foreground: 210 40% 98%;
     --color-sidebar-border: 217 33% 24%;
-    --color-sidebar-ring: 213 93% 55%;
+    --color-sidebar-ring: 217 37% 42%;
   }
 }
 

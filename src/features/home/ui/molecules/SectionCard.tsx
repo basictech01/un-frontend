@@ -63,21 +63,13 @@ export function SectionCard({ sectionKey, article }: SectionCardProps) {
       className="universe-card-hover group border border-slate-100 rounded-3xl overflow-hidden bg-white block"
     >
       <div className="aspect-[16/10] overflow-hidden bg-slate-100 relative">
-        {article?.cover_image ? (
-          <Image
-            src={article.cover_image}
-            alt={section.label}
-            fill
-            className="object-cover transition-all duration-700 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-primary-soft flex items-center justify-center">
-            <span className="font-display text-8xl font-bold text-primary/10 select-none">
-              {section.label.charAt(0)}
-            </span>
-          </div>
-        )}
+        <Image
+          src={article?.cover_image ?? `https://picsum.photos/seed/${sectionKey}/800/500`}
+          alt={section.label}
+          fill
+          className="object-cover transition-all duration-700 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
 
       <div className="p-6">
