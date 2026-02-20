@@ -27,10 +27,10 @@ export function PublicFooter() {
           {/* Brand */}
           <div className="space-y-8">
             <div className="leading-none">
-              <span className="block font-display font-black text-xl tracking-tight text-white">
+              <span className="block font-display font-black text-3xl tracking-tight text-white">
                 UN
               </span>
-              <span className="text-[9px] uppercase tracking-[0.2em] text-slate-300 font-bold">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-slate-300 font-bold">
                 Uttarakhand Next
               </span>
             </div>

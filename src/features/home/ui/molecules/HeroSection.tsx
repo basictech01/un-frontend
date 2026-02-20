@@ -18,7 +18,7 @@ export function HeroSection({ article, loading }: HeroSectionProps) {
   }
 
   return (
-    <section className="relative h-[82vh] min-h-[60vh] rounded-[2.5rem] overflow-hidden mb-16 group shadow-2xl">
+    <section className="relative h-[82vh] min-h-[60vh] rounded-[2.5rem] overflow-hidden mb-16 group shadow-2xl bg-slate-200">
       {/* Background */}
       <div className="absolute inset-0">
         {article?.cover_image ? (
@@ -35,8 +35,6 @@ export function HeroSection({ article, loading }: HeroSectionProps) {
         )}
       </div>
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 hero-gradient" />
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-16 lg:p-20">
