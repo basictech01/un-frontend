@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+
 const UNIVERSE_LINKS = [
   { label: "Voices & Visionaries", key: "VOICES_AND_VISIONARIES" },
   { label: "Growth & Grit", key: "GROWTH_AND_GRIT" },
@@ -26,13 +27,13 @@ export function PublicFooter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
           {/* Brand */}
           <div className="space-y-8">
-            <div className="leading-none">
-              <span className="block font-display font-black text-3xl tracking-tight text-white">
-                UN
-              </span>
-              <span className="text-[11px] uppercase tracking-[0.2em] text-slate-300 font-bold">
-                Uttarakhand Next
-              </span>
+            <div className="relative h-28 w-72">
+              <Image
+                src="/logo/logoTp.png"
+                alt="Uttarakhand Next"
+                fill
+                className="object-contain object-left"
+              />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               Uttarakhand Next is a premium digital platform documenting the

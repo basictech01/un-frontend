@@ -13,12 +13,12 @@ export function HeroSection({ article, loading }: HeroSectionProps) {
 
   if (loading) {
     return (
-      <section className="relative h-[82vh] min-h-[60vh] rounded-[2.5rem] overflow-hidden mb-16 bg-slate-200 animate-pulse" />
+      <section className="relative h-[65vh] min-h-[50vh] rounded-[2.5rem] overflow-hidden mb-16 bg-slate-200 animate-pulse" />
     );
   }
 
   return (
-    <section className="relative h-[82vh] min-h-[60vh] rounded-[2.5rem] overflow-hidden mb-16 group shadow-2xl bg-slate-200">
+    <section className="relative h-[65vh] min-h-[50vh] rounded-[2.5rem] overflow-hidden mb-16 group shadow-2xl bg-slate-200">
       {/* Background */}
       <div className="absolute inset-0">
         {article?.cover_image ? (
