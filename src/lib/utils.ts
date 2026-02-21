@@ -53,6 +53,15 @@ export function formatStatusLabel(status: string): string {
  * getInitials("John Paul Smith") // returns "JP"
  * getInitials("") // returns ""
  */
+/** Strip HTML tags and estimate reading time at 200 wpm */
+export function estimateReadTime(html: string | null | undefined): string {
+  if (!html) return "1 min read";
+  const text = html.replace(/<[^>]+>/g, " ");
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  const minutes = Math.max(1, Math.round(words / 200));
+  return `${minutes} min read`;
+}
+
 export function getInitials(name: string): string {
   if (!name || typeof name !== "string") return "";
 
