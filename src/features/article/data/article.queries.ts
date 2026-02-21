@@ -21,6 +21,26 @@ export const GET_ARTICLES = gql`
   }
 `;
 
+export const GET_APPROVED_ARTICLES = gql`
+  ${ARTICLE_LIST_FIELDS}
+  query GetApprovedArticles($first: Int, $after: String, $filter: ArticleFilter) {
+    approvedArticles(first: $first, after: $after, filter: $filter) {
+      edges {
+        cursor
+        node {
+          ...ArticleListFields
+        }
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+      totalCount
+    }
+  }
+`;
+
 export const GET_PENDING_ARTICLES = gql`
   ${ARTICLE_LIST_FIELDS}
   query GetPendingArticles($first: Int, $after: String) {
@@ -52,7 +72,7 @@ export const GET_ARTICLE = gql`
 
 export const GET_MY_ARTICLES = gql`
   ${ARTICLE_LIST_FIELDS}
-  query GetMyArticles($first: Int, $after: String, $status: String) {
+  query GetMyArticles($first: Int, $after: String, $status: ArticleStatus) {
     myArticles(first: $first, after: $after, status: $status) {
       edges {
         cursor

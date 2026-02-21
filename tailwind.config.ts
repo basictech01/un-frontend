@@ -12,6 +12,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        /* Public home page design tokens (from UI-UX reference) */
+        "forest-green": "#1A4D2E",
+        "slate-blue": "#2D4263",
+        "public-blue": "hsl(var(--color-public-blue))",
         primary: {
           DEFAULT: "var(--color-primary)",
           foreground: "var(--color-primary-foreground)",
@@ -50,6 +54,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         serif: ["var(--font-serif)", "Georgia", "serif"],
+        display: ["var(--font-display)", "Georgia", "serif"],
       },
     },
   },

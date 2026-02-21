@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { CREATE_ARTICLE } from "../data/article.mutations";
-import { GET_ARTICLES } from "../data/article.queries";
+import { SUBMIT_ARTICLE } from "../data/article.mutations";
 import type { ArticleFormState } from "../types";
 import { initialArticleForm } from "../types";
 import type { Article } from "@/types/common";
@@ -15,11 +15,13 @@ export function useCreateArticle(redirectPath: string = "/admin") {
   const router = useRouter();
   const [formData, setFormData] = useState<ArticleFormState>(initialArticleForm);
 
-  const [createMutation, { loading }] = useMutation<{
+  const [createMutation, { loading: createLoading }] = useMutation<{
     createArticle: Article;
-  }>(CREATE_ARTICLE, {
-    refetchQueries: [{ query: GET_ARTICLES, variables: { first: 10 } }],
-  });
+  }>(CREATE_ARTICLE);
+
+  const [submitMutation, { loading: submitLoading }] = useMutation<{
+    submitArticle: Article;
+  }>(SUBMIT_ARTICLE);
 
   const handleChange = useCallback(
     (field: keyof ArticleFormState, value: unknown) => {
@@ -28,60 +30,76 @@ export function useCreateArticle(redirectPath: string = "/admin") {
     []
   );
 
-  const handleSubmit = useCallback(async () => {
-    if (!formData.title.trim()) {
-      toast.error("Title is required");
-      return;
-    }
-    if (!formData.content.trim()) {
-      toast.error("Content is required");
-      return;
-    }
-    if (!formData.section) {
-      toast.error("Section is required");
-      return;
-    }
-    if (formData.subsections.length === 0) {
-      toast.error("At least one subsection is required");
-      return;
-    }
-
-    try {
-      let coverImageUrl = "";
-
-      // Upload image if file exists
-      if (formData.coverImageFile?.file) {
-        const uploadResult = await apiClient.uploadImage(
-          formData.coverImageFile.file
-        );
-        coverImageUrl = uploadResult.url;
+  const handleSubmit = useCallback(
+    async (submitForReview = false) => {
+      if (!formData.title.trim()) {
+        toast.error("Title is required");
+        return;
+      }
+      if (!formData.content.trim()) {
+        toast.error("Content is required");
+        return;
+      }
+      if (!formData.section) {
+        toast.error("Section is required");
+        return;
+      }
+      if (formData.subsections.length === 0) {
+        toast.error("At least one subsection is required");
+        return;
       }
 
-      await createMutation({
-        variables: {
-          input: {
-            title: formData.title,
-            content: formData.content,
-            excerpt: formData.excerpt || undefined,
-            section: formData.section,
-            subsections: formData.subsections,
-            coverImage: coverImageUrl || undefined,
-            status: formData.status,
+      try {
+        let coverImageUrl = "";
+
+        if (formData.coverImageFile?.file) {
+          const uploadResult = await apiClient.uploadImage(
+            formData.coverImageFile.file
+          );
+          coverImageUrl = uploadResult.url;
+        }
+
+        const result = await createMutation({
+          variables: {
+            input: {
+              title: formData.title,
+              content: formData.content,
+              excerpt: formData.excerpt || undefined,
+              section: formData.section,
+              subsections: formData.subsections,
+              coverImage: coverImageUrl || undefined,
+            },
           },
-        },
-      });
-      toast.success("Article created successfully");
-      router.push(redirectPath);
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Failed to create article";
-      toast.error(message);
-    }
-  }, [formData, createMutation, router]);
+        });
+
+        const newArticleId = result.data?.createArticle.id;
+
+        if (submitForReview && newArticleId) {
+          await submitMutation({ variables: { id: newArticleId } });
+          toast.success("Article submitted for review");
+        } else {
+          toast.success("Article saved as draft");
+        }
+
+        router.push(redirectPath);
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : "Failed to save article";
+        toast.error(message);
+      }
+    },
+    [formData, createMutation, submitMutation, router, redirectPath]
+  );
 
   const handleReset = useCallback(() => {
     setFormData(initialArticleForm);
   }, []);
 
-  return { formData, handleChange, handleSubmit, handleReset, isLoading: loading };
+  return {
+    formData,
+    handleChange,
+    handleSubmit,
+    handleReset,
+    isLoading: createLoading || submitLoading,
+  };
 }

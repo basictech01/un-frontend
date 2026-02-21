@@ -51,7 +51,7 @@ export function LoginForm() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isLoading}
-                className="pl-10 transition-all focus:ring-2 focus:ring-blue-500/20"
+                className="pl-10 transition-all focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400"
               />
             </div>
           </div>
@@ -70,7 +70,7 @@ export function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={isLoading}
-                className="pl-10 transition-all focus:ring-2 focus:ring-blue-500/20"
+                className="pl-10 transition-all focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400"
               />
             </div>
           </div>

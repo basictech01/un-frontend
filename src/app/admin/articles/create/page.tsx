@@ -14,21 +14,13 @@ import { ArrowLeft, Loader2, Save, Check, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import { ArticleForm } from "@/features/article/ui/molecules/ArticleForm";
 import { useCreateArticle } from "@/features/article/hooks/useCreateArticle";
-import { ArticleStatus } from "@/types/enums";
 
 export default function CreateArticlePage() {
   const { formData, handleChange, handleSubmit, handleReset, isLoading } =
     useCreateArticle();
 
-  const handleSaveDraft = () => {
-    handleChange("status", ArticleStatus.DRAFT);
-    setTimeout(() => handleSubmit(), 0);
-  };
-
-  const handlePublish = () => {
-    handleChange("status", ArticleStatus.PENDING);
-    setTimeout(() => handleSubmit(), 0);
-  };
+  const handleSaveDraft = () => handleSubmit(false);
+  const handlePublish = () => handleSubmit(false);
 
   return (
     <div className="space-y-6 pb-24">
@@ -84,17 +76,8 @@ export default function CreateArticlePage() {
                   disabled={isLoading}
                   className="w-full border border-secondary-light bg-secondary-ultra-light text-secondary shadow-sm sm:w-auto"
                 >
-                  {isLoading && formData.status === ArticleStatus.DRAFT ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Saving...
-                    </>
-                  ) : (
-                    <>
-                      <Save className="mr-2 h-4 w-4" />
-                      Save Draft
-                    </>
-                  )}
+                  <Save className="mr-2 h-4 w-4" />
+                  Save Draft
                 </Button>
 
                 <Button
@@ -102,7 +85,7 @@ export default function CreateArticlePage() {
                   disabled={isLoading}
                   className="btn-primary-action w-full shadow-md transition-all hover:shadow-lg sm:w-auto"
                 >
-                  {isLoading && formData.status === ArticleStatus.PENDING ? (
+                  {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Publishing...
