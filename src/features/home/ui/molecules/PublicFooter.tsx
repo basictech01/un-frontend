@@ -1,15 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SECTIONS } from "@/types/enums";
 
-
-const UNIVERSE_LINKS = [
-  { label: "Voices & Visionaries", key: "VOICES_AND_VISIONARIES" },
-  { label: "Growth & Grit", key: "GROWTH_AND_GRIT" },
-  { label: "Nature & Nurture", key: "NATURE_AND_NURTURE" },
-  { label: "Spirit & Story", key: "SPIRIT_AND_STORY" },
-  { label: "Learning & Ladders", key: "LEARNING_AND_LADDERS" },
-  { label: "State & Stewardship", key: "STATE_AND_STEWARDSHIP" },
-];
+const UNIVERSE_LINKS = Object.values(SECTIONS).map((s) => ({
+  label: s.label,
+  key: s.key,
+}));
 
 const COMPANY_LINKS = [
   { label: "About Us", href: "/about" },
