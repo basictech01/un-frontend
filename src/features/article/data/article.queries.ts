@@ -70,6 +70,26 @@ export const GET_ARTICLE = gql`
   }
 `;
 
+export const GET_TRENDING_ARTICLES = gql`
+  ${ARTICLE_LIST_FIELDS}
+  query GetTrendingArticles($first: Int) {
+    trendingArticles(first: $first) {
+      edges {
+        cursor
+        node {
+          ...ArticleListFields
+        }
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+      totalCount
+    }
+  }
+`;
+
 export const GET_MY_ARTICLES = gql`
   ${ARTICLE_LIST_FIELDS}
   query GetMyArticles($first: Int, $after: String, $status: ArticleStatus) {

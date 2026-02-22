@@ -42,17 +42,6 @@ export function ArticleShareBar({ title }: ArticleShareBarProps) {
         >
           <Link2 className="w-5 h-5 text-slate-600" />
         </button>
-        <button
-          onClick={() => setBookmarked((b) => !b)}
-          className="p-2 rounded-full border border-slate-200 hover:bg-slate-100 transition-colors"
-          aria-label="Bookmark article"
-        >
-          {bookmarked ? (
-            <BookmarkCheck className="w-5 h-5 text-primary" />
-          ) : (
-            <Bookmark className="w-5 h-5 text-slate-600" />
-          )}
-        </button>
       </div>
       {copied && (
         <span className="text-xs font-bold text-forest-green uppercase tracking-widest">

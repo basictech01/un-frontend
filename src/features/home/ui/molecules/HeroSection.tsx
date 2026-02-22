@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/ui/button";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import type { HeroSectionProps } from "@/types/public";
 
 export function HeroSection({ article, loading }: HeroSectionProps) {
@@ -13,7 +14,11 @@ export function HeroSection({ article, loading }: HeroSectionProps) {
 
   if (loading) {
     return (
-      <section className="relative h-[65vh] min-h-[50vh] rounded-[2.5rem] overflow-hidden mb-16 bg-slate-200 animate-pulse" />
+      <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f8fafc">
+        <section className="relative h-[65vh] min-h-[50vh] rounded-[2.5rem] overflow-hidden mb-16">
+          <Skeleton height="100%" style={{ display: "block", lineHeight: "unset" }} />
+        </section>
+      </SkeletonTheme>
     );
   }
 

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { X, Search } from "lucide-react";
-import { UNLoader } from "@/components/organisms";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSearchArticles } from "../../hooks/useSearchArticles";
 import { SearchResultCard } from "../molecules/SearchResultCard";
 
@@ -42,9 +42,19 @@ export function NavSearch() {
   const resultPanel = (
     <>
       {loading && (
-        <div className="flex justify-center py-6">
-          <UNLoader />
-        </div>
+        <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f8fafc">
+          <div className="flex flex-col gap-1 py-2">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="flex items-center gap-3 px-2 py-2">
+                <Skeleton width={44} height={44} borderRadius={8} style={{ flexShrink: 0 }} />
+                <div className="flex-1 space-y-1">
+                  <Skeleton height={13} width="70%" />
+                  <Skeleton height={11} width="40%" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </SkeletonTheme>
       )}
       {!loading && articles.length === 0 && (
         <p className="text-sm text-slate-400 text-center py-6">

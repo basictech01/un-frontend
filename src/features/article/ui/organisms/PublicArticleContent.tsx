@@ -1,6 +1,6 @@
 "use client";
 
-import { UNLoader } from "@/components/organisms";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useArticle } from "../../hooks/useArticle";
 import { PublicArticleHero } from "../molecules/PublicArticleHero";
 import { PublicArticleBody } from "../molecules/PublicArticleBody";
@@ -16,9 +16,34 @@ export function PublicArticleContent({ id }: PublicArticleContentProps) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-32">
-        <UNLoader />
-      </div>
+      <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f8fafc">
+        {/* Hero image */}
+        <div className="h-[55vh] min-h-[360px]">
+          <Skeleton height="100%" style={{ display: "block", lineHeight: "unset" }} />
+        </div>
+
+        {/* Article body + sidebar */}
+        <main className="container mx-auto px-4 py-12 lg:py-20 max-w-6xl">
+          <div className="flex flex-col lg:flex-row gap-16">
+            {/* Body */}
+            <div className="w-full lg:w-3/4 space-y-4">
+              <Skeleton height={44} width="80%" />
+              <Skeleton height={18} width="45%" />
+              <div className="mt-8 space-y-3">
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <Skeleton key={i} height={16} width={i % 5 === 4 ? "55%" : "100%"} />
+                ))}
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="w-full lg:w-1/4 space-y-6">
+              <Skeleton height={130} borderRadius={12} style={{ display: "block", lineHeight: "unset" }} />
+              <Skeleton height={220} borderRadius={12} style={{ display: "block", lineHeight: "unset" }} />
+            </div>
+          </div>
+        </main>
+      </SkeletonTheme>
     );
   }
 

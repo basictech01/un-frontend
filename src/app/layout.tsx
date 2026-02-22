@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "@/styles/globals.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import { ApolloProvider } from "@/providers/ApolloProvider";
 import { AuthProvider } from "@/features/auth/hooks/useAuth";
 import { Toaster } from "sonner";
