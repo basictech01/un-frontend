@@ -1,4 +1,4 @@
-import { Skeleton } from "@/ui/skeleton";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import type { LatestStoriesSidebarProps } from "@/types/public";
 import { LatestStoryCard } from "./LatestStoryCard";
 
@@ -17,18 +17,20 @@ export function LatestStoriesSidebar({
       </div>
 
       {loading ? (
-        <div className="space-y-6">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="flex gap-4">
-              <Skeleton className="w-20 h-24 shrink-0 rounded-lg bg-slate-200" />
-              <div className="flex-grow pt-1 space-y-2">
-                <Skeleton className="h-4 w-full bg-slate-200" />
-                <Skeleton className="h-4 w-4/5 bg-slate-200" />
-                <Skeleton className="h-3 w-1/3 mt-3 bg-slate-200" />
+        <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f8fafc">
+          <div className="space-y-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="flex gap-4">
+                <Skeleton width={80} height={96} borderRadius={8} style={{ flexShrink: 0 }} />
+                <div className="flex-grow pt-1 space-y-2">
+                  <Skeleton height={16} />
+                  <Skeleton width="80%" height={16} />
+                  <Skeleton width="33%" height={12} />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </SkeletonTheme>
       ) : latestArticles.length === 0 ? (
         <p className="text-sm text-slate-500">No stories yet.</p>
       ) : (

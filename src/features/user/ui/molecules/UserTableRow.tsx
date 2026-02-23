@@ -42,7 +42,7 @@ export function UserTableRow({
         </div>
       </TableCell>
       <TableCell>
-        <RoleBadge role={user.role} />
+        <RoleBadge role={user.role as import("@/types/enums").UserRole} />
       </TableCell>
       <TableCell>
         {user.profession ? (

@@ -7,7 +7,7 @@ import {
   getSubsectionsForSection,
   slugToSectionKey,
 } from "@/types/enums";
-import { UNLoader } from "@/components/organisms";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSectionArticles } from "../../hooks/useSectionArticles";
 import { SectionHeroBanner } from "../molecules/SectionHeroBanner";
 import { SectionHeading } from "../molecules/SectionHeading";
@@ -17,6 +17,8 @@ import { ArticleGridCard } from "../molecules/ArticleGridCard";
 import type { Article } from "@/types/common";
 
 const MORE_STORIES_PAGE = 6;
+const FEATURED_LIMIT = 4; // Max articles shown in featured subsection grid
+const LIST_LIMIT = 3;     // Max articles shown per list subsection
 
 interface SectionPageContentProps {
   /** URL slug, e.g. "voices_and_visionaries" */
@@ -50,14 +52,15 @@ export function SectionPageContent({ sectionKey }: SectionPageContentProps) {
     return map;
   }, [articles, subsectionKeys]);
 
-  // Articles not placed in any subsection bucket → "More Stories"
+  // IDs of articles shown inside subsection buckets (capped) → rest go to "More Stories"
   const subsectionArticleIds = useMemo(() => {
     const ids = new Set<number>();
-    for (const sub of subsectionKeys) {
-      for (const a of articlesBySubsection[sub] ?? []) {
+    subsectionKeys.forEach((sub, i) => {
+      const limit = i === 0 ? FEATURED_LIMIT : LIST_LIMIT;
+      for (const a of (articlesBySubsection[sub] ?? []).slice(0, limit)) {
         ids.add(a.id);
       }
-    }
+    });
     return ids;
   }, [articlesBySubsection, subsectionKeys]);
 
@@ -114,22 +117,79 @@ export function SectionPageContent({ sectionKey }: SectionPageContentProps) {
     );
   }
 
+  if (loading) {
+    return (
+      <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f8fafc">
+        {/* Hero banner */}
+        <div className="mb-16">
+          <Skeleton height={300} borderRadius={24} style={{ display: "block", lineHeight: "unset" }} />
+        </div>
+
+        {/* Featured subsection */}
+        <div className="mb-20">
+          <Skeleton width={160} height={20} className="mb-2" />
+          <Skeleton width={260} height={13} className="mb-8" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-auto lg:h-[600px]">
+            <div className="lg:col-span-8">
+              <Skeleton height={400} borderRadius={24} style={{ display: "block", lineHeight: "unset" }} className="lg:!h-full" />
+            </div>
+            <div className="lg:col-span-4 flex flex-col gap-6">
+              <Skeleton height={288} borderRadius={24} style={{ display: "block", lineHeight: "unset" }} />
+              <Skeleton height={288} borderRadius={24} style={{ display: "block", lineHeight: "unset" }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Two-col list subsections */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i}>
+              <Skeleton width={140} height={18} className="mb-2" />
+              <Skeleton width={220} height={12} className="mb-6" />
+              <div className="space-y-4">
+                {[0, 1, 2].map((j) => (
+                  <div key={j} className="flex gap-4">
+                    <Skeleton width={80} height={64} borderRadius={8} style={{ flexShrink: 0 }} />
+                    <div className="flex-1 pt-1 space-y-2">
+                      <Skeleton height={15} />
+                      <Skeleton width="65%" height={12} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* More Stories grid preview */}
+        <div className="mb-6">
+          <Skeleton width={130} height={18} className="mb-6" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="rounded-2xl overflow-hidden border border-slate-100">
+                <Skeleton height={180} style={{ display: "block", lineHeight: "unset" }} borderRadius={0} />
+                <div className="p-4 space-y-2">
+                  <Skeleton height={16} />
+                  <Skeleton width="75%" height={14} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </SkeletonTheme>
+    );
+  }
+
   const heroCoverImage = articles.at(0)?.cover_image ?? null;
 
   return (
     <>
       {/* ── Hero Banner ─────────────────────────────── */}
-      {loading ? (
-        <div className="h-[300px] rounded-3xl mb-16 bg-slate-200 flex items-center justify-center">
-          <UNLoader />
-        </div>
-      ) : (
-        <SectionHeroBanner
-          label={sectionMeta.label}
-          tagline={sectionMeta.tagline}
-          coverImage={heroCoverImage}
-        />
-      )}
+      <SectionHeroBanner
+        label={sectionMeta.label}
+        tagline={sectionMeta.tagline}
+        coverImage={heroCoverImage}
+      />
 
       {/* ── Featured subsection (big grid) ─────────── */}
       {featuredSubKey && (
@@ -139,15 +199,9 @@ export function SectionPageContent({ sectionKey }: SectionPageContentProps) {
             tagline={SUBSECTIONS[featuredSubKey]?.tagline}
             size="lg"
           />
-          {loading ? (
-            <div className="flex items-center justify-center h-96">
-              <UNLoader />
-            </div>
-          ) : (
-            <FeaturedArticleGrid
-              articles={articlesBySubsection[featuredSubKey] ?? []}
-            />
-          )}
+          <FeaturedArticleGrid
+            articles={(articlesBySubsection[featuredSubKey] ?? []).slice(0, FEATURED_LIMIT)}
+          />
         </section>
       )}
 
@@ -160,23 +214,16 @@ export function SectionPageContent({ sectionKey }: SectionPageContentProps) {
                 <SectionHeading
                   label={SUBSECTIONS[subKey]?.label ?? subKey}
                   tagline={SUBSECTIONS[subKey]?.tagline}
+                  size="lg"
                 />
-                {loading ? (
-                  <div className="flex items-center justify-center py-8">
-                    <UNLoader />
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {(articlesBySubsection[subKey] ?? []).map((article) => (
-                      <ArticleListCard key={article.id} article={article} />
-                    ))}
-                    {(articlesBySubsection[subKey] ?? []).length === 0 && (
-                      <p className="text-sm text-slate-400 italic">
-                        No articles yet.
-                      </p>
-                    )}
-                  </div>
-                )}
+                <div className="space-y-4">
+                  {(articlesBySubsection[subKey] ?? []).slice(0, LIST_LIMIT).map((article) => (
+                    <ArticleListCard key={article.id} article={article} />
+                  ))}
+                  {(articlesBySubsection[subKey] ?? []).length === 0 && (
+                    <p className="text-sm text-slate-400 italic">No articles yet.</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -188,22 +235,14 @@ export function SectionPageContent({ sectionKey }: SectionPageContentProps) {
                   label={SUBSECTIONS[subKey]?.label ?? subKey}
                   tagline={SUBSECTIONS[subKey]?.tagline}
                 />
-                {loading ? (
-                  <div className="flex items-center justify-center py-8">
-                    <UNLoader />
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {(articlesBySubsection[subKey] ?? []).map((article) => (
-                      <ArticleListCard key={article.id} article={article} />
-                    ))}
-                    {(articlesBySubsection[subKey] ?? []).length === 0 && (
-                      <p className="text-sm text-slate-400 italic">
-                        No articles yet.
-                      </p>
-                    )}
-                  </div>
-                )}
+                <div className="space-y-4">
+                  {(articlesBySubsection[subKey] ?? []).slice(0, LIST_LIMIT).map((article) => (
+                    <ArticleListCard key={article.id} article={article} />
+                  ))}
+                  {(articlesBySubsection[subKey] ?? []).length === 0 && (
+                    <p className="text-sm text-slate-400 italic">No articles yet.</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -214,28 +253,30 @@ export function SectionPageContent({ sectionKey }: SectionPageContentProps) {
       {hasMoreStories && (
         <section className="mt-4">
           <SectionHeading label="More Stories" />
-          {loading ? (
-            <div className="flex items-center justify-center py-12">
-              <UNLoader />
-            </div>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {visibleRemaining.map((article) => (
-                  <ArticleGridCard key={article.id} article={article} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {visibleRemaining.map((article) => (
+              <ArticleGridCard key={article.id} article={article} />
+            ))}
+          </div>
+
+          {/* Sentinel — observed to trigger next page */}
+          <div ref={sentinelRef} className="h-1" />
+
+          {/* Shimmer rows while fetching next server page */}
+          {loadingMore && (
+            <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f8fafc">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="rounded-2xl overflow-hidden border border-slate-100">
+                    <Skeleton height={180} style={{ display: "block", lineHeight: "unset" }} borderRadius={0} />
+                    <div className="p-4 space-y-2">
+                      <Skeleton height={16} />
+                      <Skeleton width="75%" height={14} />
+                    </div>
+                  </div>
                 ))}
               </div>
-
-              {/* Sentinel — observed to trigger next page */}
-              <div ref={sentinelRef} className="h-1" />
-
-              {/* Spinner shown while fetching next server page */}
-              {loadingMore && (
-                <div className="flex justify-center py-10">
-                  <UNLoader />
-                </div>
-              )}
-            </>
+            </SkeletonTheme>
           )}
         </section>
       )}

@@ -51,7 +51,7 @@ export function SectionCard({ sectionKey, article }: SectionCardProps) {
     Icon: BookOpen,
   };
   const { labelClass, Icon } = config;
-  const href = `/section/${sectionKey.toLowerCase()}`;
+  const href = article ? `/articles/${article.id}` : `/section/${sectionKey.toLowerCase()}`;
   const title = article?.title ?? section.tagline;
   const excerpt =
     article?.excerpt ??

@@ -1,5 +1,5 @@
-import { Skeleton } from "@/ui/skeleton";
 import { Separator } from "@/ui/separator";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { SECTIONS } from "@/types/enums";
 import type { ContentUniverseSectionProps } from "@/types/public";
 import { SectionCard } from "./SectionCard";
@@ -10,27 +10,26 @@ export function ContentUniverseSection({
 }: ContentUniverseSectionProps) {
   if (loading) {
     return (
-      <div>
-        <div className="flex items-center mb-10">
-          <Skeleton className="h-8 w-48 bg-slate-200 shrink-0" />
-          <Separator className="flex-grow ml-6 bg-slate-200" />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={i}
-              className="border border-slate-100 rounded-3xl overflow-hidden"
-            >
-              <Skeleton className="aspect-[16/10] w-full rounded-none bg-slate-200" />
-              <div className="p-6 space-y-3">
-                <Skeleton className="h-3 w-24 bg-slate-200" />
-                <Skeleton className="h-5 w-full bg-slate-200" />
-                <Skeleton className="h-4 w-4/5 bg-slate-200" />
+      <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f8fafc">
+        <div>
+          <div className="flex items-center mb-10 gap-6">
+            <Skeleton width={192} height={32} borderRadius={6} />
+            <Separator className="flex-grow bg-slate-200" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="border border-slate-100 rounded-3xl overflow-hidden">
+                <Skeleton height={200} style={{ display: "block", lineHeight: "unset" }} borderRadius={0} />
+                <div className="p-6 space-y-3">
+                  <Skeleton width={96} height={12} />
+                  <Skeleton height={22} />
+                  <Skeleton width="80%" height={16} />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </SkeletonTheme>
     );
   }
 
