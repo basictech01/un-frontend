@@ -12,6 +12,7 @@ export function LatestStoryCard({ article }: LatestStoryCardProps) {
   return (
     <Link
       href={`/articles/${article.id}`}
+      data-cy="latest-story-card"
       className="flex gap-4 group cursor-pointer items-start"
     >
       <div className="shrink-0 rounded-lg overflow-hidden bg-slate-100">

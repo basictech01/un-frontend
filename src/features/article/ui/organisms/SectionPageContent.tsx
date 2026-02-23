@@ -251,7 +251,7 @@ export function SectionPageContent({ sectionKey }: SectionPageContentProps) {
 
       {/* ── More Stories — infinite scroll grid ─────── */}
       {hasMoreStories && (
-        <section className="mt-4">
+        <section data-cy="more-stories" className="mt-4">
           <SectionHeading label="More Stories" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {visibleRemaining.map((article) => (

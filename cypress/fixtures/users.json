@@ -1,0 +1,12 @@
+{
+  "admin": {
+    "email": "admin@hillsquills.com",
+    "password": "admin123",
+    "role": "ADMIN"
+  },
+  "author": {
+    "email": "author@hillsquills.com",
+    "password": "author123",
+    "role": "AUTHOR"
+  }
+}

@@ -60,6 +60,7 @@ export function SectionCard({ sectionKey, article }: SectionCardProps) {
   return (
     <Link
       href={href}
+      data-cy="section-card"
       className="universe-card-hover group border border-slate-100 rounded-3xl overflow-hidden bg-white block"
     >
       <div className="aspect-[16/10] overflow-hidden bg-slate-100 relative">

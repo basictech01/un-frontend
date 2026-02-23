@@ -22,7 +22,7 @@ export function PublicArticleHero({ article }: PublicArticleHeroProps) {
   const readTime = estimateReadTime(article.content);
 
   return (
-    <header className="relative w-full h-[60vh] min-h-[40vh] overflow-hidden">
+    <header data-cy="article-hero" className="relative w-full h-[60vh] min-h-[40vh] overflow-hidden">
       <Image
         src={img}
         alt={article.title}
@@ -38,7 +38,7 @@ export function PublicArticleHero({ article }: PublicArticleHeroProps) {
             <span className="inline-block bg-forest-green text-white text-xs font-bold uppercase tracking-widest px-3 py-1 self-start rounded">
               {badgeLabel}
             </span>
-            <h1 className="font-display text-4xl md:text-6xl text-white leading-tight font-bold max-w-4xl">
+            <h1 data-cy="article-title" className="font-display text-4xl md:text-6xl text-white leading-tight font-bold max-w-4xl">
               {article.title}
             </h1>
             <div className="flex items-center gap-6 text-slate-200 text-sm mt-4">

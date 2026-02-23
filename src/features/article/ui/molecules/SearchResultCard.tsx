@@ -20,6 +20,7 @@ export function SearchResultCard({ article, onSelect }: SearchResultCardProps) {
     <Link
       href={`/articles/${article.id}`}
       onClick={onSelect}
+      data-cy="search-result-card"
       className="flex gap-4 group items-start py-3 border-b border-slate-100 last:border-0 hover:bg-slate-50 px-2 rounded-xl transition-colors"
     >
       <div className="shrink-0 rounded-lg overflow-hidden bg-slate-100">

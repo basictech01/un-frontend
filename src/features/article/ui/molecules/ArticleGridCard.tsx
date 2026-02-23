@@ -15,6 +15,7 @@ export function ArticleGridCard({ article }: ArticleGridCardProps) {
   return (
     <Link
       href={`/articles/${article.id}`}
+      data-cy="article-grid-card"
       className="bg-white rounded-3xl overflow-hidden shadow-sm group cursor-pointer border border-slate-100 hover:border-slate-200 transition-colors block"
     >
       <div className="aspect-[16/10] overflow-hidden relative">
