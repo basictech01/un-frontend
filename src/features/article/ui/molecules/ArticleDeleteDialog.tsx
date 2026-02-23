@@ -45,6 +45,7 @@ export function ArticleDeleteDialog({
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
+            data-cy="delete-confirm"
             className="shadow-sm"
             style={{
               backgroundColor: 'hsl(var(--color-destructive))',

@@ -87,6 +87,7 @@ export default function ArticleDetailPage({
                   size="sm"
                   onClick={() => handleApprove(article.id)}
                   disabled={isApproving}
+                  data-cy="article-detail-approve"
                   className="bg-secondary text-secondary-foreground shadow-sm"
                 >
                   <CheckCircle className="mr-1 h-4 w-4" />
@@ -97,6 +98,7 @@ export default function ArticleDetailPage({
                   variant="destructive"
                   onClick={() => setRejectOpen(true)}
                   disabled={isRejecting}
+                  data-cy="article-detail-reject"
                   className="shadow-sm"
                 >
                   <XCircle className="mr-1 h-4 w-4" />

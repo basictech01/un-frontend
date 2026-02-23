@@ -107,6 +107,7 @@ export function NavSearch() {
             />
             <button
               onClick={close}
+              data-cy="search-close"
               className="p-1 text-slate-400 hover:text-slate-700 transition-colors rounded-lg hover:bg-slate-100 shrink-0"
               aria-label="Close search"
             >

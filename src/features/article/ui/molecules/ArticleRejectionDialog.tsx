@@ -48,6 +48,7 @@ export function ArticleRejectionDialog({
           <Label htmlFor="reason">Rejection Reason</Label>
           <Textarea
             id="reason"
+            data-cy="rejection-reason"
             value={reason}
             onChange={(e) => setReason(e.target.value)}
             placeholder="Enter the reason for rejection..."
@@ -69,6 +70,7 @@ export function ArticleRejectionDialog({
           <Button
             onClick={handleConfirm}
             disabled={!reason.trim()}
+            data-cy="rejection-submit"
             className="shadow-sm"
             style={{
               backgroundColor: 'hsl(var(--color-destructive))',

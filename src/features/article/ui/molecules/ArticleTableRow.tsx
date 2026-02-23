@@ -35,7 +35,7 @@ export function ArticleTableRow({
   onDelete,
 }: ArticleTableRowProps) {
   return (
-    <TableRow className="group transition-all hover:bg-primary/8 hover:shadow-sm">
+    <TableRow data-cy="article-row" className="group transition-all hover:bg-primary/8 hover:shadow-sm">
       {showCheckbox && (
         <TableCell>
           <Checkbox
@@ -85,6 +85,7 @@ export function ArticleTableRow({
               <Button
                 onClick={() => onApprove(article.id)}
                 size="sm"
+                data-cy="approve-btn"
                 className="h-8 px-3 text-xs font-medium shadow-sm transition-all hover:shadow-md"
                 style={{
                   backgroundColor: 'hsl(var(--color-secondary))',
@@ -99,6 +100,7 @@ export function ArticleTableRow({
               <Button
                 onClick={() => onReject(article.id)}
                 size="sm"
+                data-cy="reject-btn"
                 className="h-8 px-3 text-xs font-medium shadow-sm transition-all hover:shadow-md"
                 style={{
                   backgroundColor: 'hsl(var(--color-destructive))',
