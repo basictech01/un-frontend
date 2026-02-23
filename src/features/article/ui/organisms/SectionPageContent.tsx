@@ -214,6 +214,7 @@ export function SectionPageContent({ sectionKey }: SectionPageContentProps) {
                 <SectionHeading
                   label={SUBSECTIONS[subKey]?.label ?? subKey}
                   tagline={SUBSECTIONS[subKey]?.tagline}
+                  size="lg"
                 />
                 <div className="space-y-4">
                   {(articlesBySubsection[subKey] ?? []).slice(0, LIST_LIMIT).map((article) => (
