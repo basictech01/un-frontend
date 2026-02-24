@@ -109,6 +109,7 @@ export function ArticlesTable({
               onClick={handleBulkApproveClick}
               disabled={bulkLoading}
               size="sm"
+              data-cy="bulk-approve-btn"
               className="bg-secondary hover:bg-secondary/90"
             >
               <CheckCircle className="mr-2 h-4 w-4" />
@@ -118,6 +119,7 @@ export function ArticlesTable({
               onClick={handleBulkDeleteClick}
               disabled={bulkLoading}
               size="sm"
+              data-cy="bulk-delete-btn"
               variant="destructive"
             >
               <Trash2 className="mr-2 h-4 w-4" />

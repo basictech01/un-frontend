@@ -51,6 +51,7 @@ export function LoginForm() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isLoading}
+                data-cy="login-email"
                 className="pl-10 transition-all focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400"
               />
             </div>
@@ -70,6 +71,7 @@ export function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={isLoading}
+                data-cy="login-password"
                 className="pl-10 transition-all focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400"
               />
             </div>
@@ -77,6 +79,7 @@ export function LoginForm() {
 
           <Button
             type="submit"
+            data-cy="login-submit"
             className="group relative w-full overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/50 transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-500/50 active:scale-[0.98]"
             disabled={isLoading}
             size="lg"

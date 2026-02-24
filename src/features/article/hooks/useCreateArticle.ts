@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { CREATE_ARTICLE } from "../data/article.mutations";
 import { SUBMIT_ARTICLE } from "../data/article.mutations";
-import type { ArticleFormState } from "../types";
+import type { ArticleFormState, ArticleFormErrors } from "../types";
 import { initialArticleForm } from "../types";
 import type { Article } from "@/types/common";
 import { apiClient } from "@/lib/api";
@@ -14,6 +14,7 @@ import { apiClient } from "@/lib/api";
 export function useCreateArticle(redirectPath: string = "/admin") {
   const router = useRouter();
   const [formData, setFormData] = useState<ArticleFormState>(initialArticleForm);
+  const [errors, setErrors] = useState<ArticleFormErrors>({});
 
   const [createMutation, { loading: createLoading }] = useMutation<{
     createArticle: Article;
@@ -26,26 +27,23 @@ export function useCreateArticle(redirectPath: string = "/admin") {
   const handleChange = useCallback(
     (field: keyof ArticleFormState, value: unknown) => {
       setFormData((prev) => ({ ...prev, [field]: value }));
+      // Clear error for the field being updated
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     },
     []
   );
 
   const handleSubmit = useCallback(
     async (submitForReview = false) => {
-      if (!formData.title.trim()) {
-        toast.error("Title is required");
-        return;
-      }
-      if (!formData.content.trim()) {
-        toast.error("Content is required");
-        return;
-      }
-      if (!formData.section) {
-        toast.error("Section is required");
-        return;
-      }
-      if (formData.subsections.length === 0) {
-        toast.error("At least one subsection is required");
+      const newErrors: ArticleFormErrors = {};
+      if (!formData.title.trim()) newErrors.title = "Title is required";
+      if (!formData.section) newErrors.section = "Section is required";
+      if (formData.subsections.length === 0) newErrors.subsections = "At least one subsection is required";
+      if (!formData.content.trim()) newErrors.content = "Content is required";
+
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        toast.error("Please fill in all required fields");
         return;
       }
 
@@ -93,10 +91,12 @@ export function useCreateArticle(redirectPath: string = "/admin") {
 
   const handleReset = useCallback(() => {
     setFormData(initialArticleForm);
+    setErrors({});
   }, []);
 
   return {
     formData,
+    errors,
     handleChange,
     handleSubmit,
     handleReset,

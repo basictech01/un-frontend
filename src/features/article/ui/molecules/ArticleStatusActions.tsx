@@ -79,6 +79,7 @@ export function ArticleStatusActions({
           <Button
             onClick={() => onSubmit(article.id)}
             size="sm"
+            data-cy="action-submit"
             className="h-8 px-3 text-xs font-medium shadow-sm transition-all hover:shadow-md bg-secondary text-secondary-foreground"
           >
             <Send className="mr-1.5 h-3.5 w-3.5" />
@@ -140,6 +141,7 @@ export function ArticleStatusActions({
           <Button
             onClick={() => onResubmit(article.id)}
             size="sm"
+            data-cy="action-resubmit"
             className="h-8 px-3 text-xs font-medium shadow-sm transition-all hover:shadow-md bg-secondary text-secondary-foreground"
           >
             <RotateCcw className="mr-1.5 h-3.5 w-3.5" />

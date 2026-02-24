@@ -17,7 +17,7 @@ import {
   getSubsectionsForSection,
   SUBSECTIONS,
 } from "@/types/enums";
-import type { ArticleFormState } from "../../types";
+import type { ArticleFormState, ArticleFormErrors } from "../../types";
 import { ImagePicker, EMPTY_IMAGE } from "@/components/molecules/ImagePicker";
 import { commands } from "@uiw/react-md-editor";
 
@@ -31,9 +31,10 @@ const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
 interface ArticleFormProps {
   formData: ArticleFormState;
   onChange: (field: keyof ArticleFormState, value: unknown) => void;
+  errors?: ArticleFormErrors;
 }
 
-export function ArticleForm({ formData, onChange }: ArticleFormProps) {
+export function ArticleForm({ formData, onChange, errors }: ArticleFormProps) {
   const availableSubsections = formData.section
     ? getSubsectionsForSection(formData.section)
     : [];
@@ -59,14 +60,20 @@ export function ArticleForm({ formData, onChange }: ArticleFormProps) {
     <div className="space-y-8">
       {/* Title - Full Width */}
       <div className="space-y-2">
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="title">
+          Title <span className="text-destructive">*</span>
+        </Label>
         <Input
           id="title"
+          data-cy="article-form-title"
           placeholder="Enter a compelling title"
           value={formData.title}
           onChange={(e) => onChange("title", e.target.value)}
-          required
+          className={errors?.title ? "border-destructive" : ""}
         />
+        {errors?.title && (
+          <p data-cy="error-title" className="text-sm text-destructive">{errors.title}</p>
+        )}
       </div>
 
       {/* Image + Excerpt/Metadata Section */}
@@ -91,6 +98,7 @@ export function ArticleForm({ formData, onChange }: ArticleFormProps) {
             <Label htmlFor="excerpt">Excerpt</Label>
             <Textarea
               id="excerpt"
+              data-cy="article-form-excerpt"
               value={formData.excerpt}
               onChange={(e) => onChange("excerpt", e.target.value)}
               placeholder="Brief summary of the article"
@@ -103,12 +111,18 @@ export function ArticleForm({ formData, onChange }: ArticleFormProps) {
 
           <div className="grid gap-4 sm:grid-cols-2 min-h-[120px]">
             <div className="space-y-2 mb-8">
-              <Label>Section</Label>
+              <Label>
+                Section <span className="text-destructive">*</span>
+              </Label>
               <Select
                 value={formData.section}
                 onValueChange={handleSectionChange}
               >
-                <SelectTrigger aria-label="Select section">
+                <SelectTrigger
+                  aria-label="Select section"
+                  data-cy="article-form-section"
+                  className={errors?.section ? "border-destructive" : ""}
+                >
                   <SelectValue placeholder="Select a section" />
                 </SelectTrigger>
                 <SelectContent>
@@ -119,12 +133,17 @@ export function ArticleForm({ formData, onChange }: ArticleFormProps) {
                   ))}
                 </SelectContent>
               </Select>
+              {errors?.section && (
+                <p data-cy="error-section" className="text-sm text-destructive">{errors.section}</p>
+              )}
             </div>
 
             <div className="space-y-2 mb-8">
-              <Label>Subsections</Label>
+              <Label>
+                Subsections <span className="text-destructive">*</span>
+              </Label>
               {availableSubsections.length > 0 ? (
-                <div className="flex flex-wrap gap-2 rounded-md border border-input bg-background p-2.5">
+                <div data-cy="article-form-subsections" className="flex flex-wrap gap-2 rounded-md border border-input bg-background p-2.5">
                   {availableSubsections.map((sub) => (
                     <label
                       key={sub}
@@ -145,6 +164,9 @@ export function ArticleForm({ formData, onChange }: ArticleFormProps) {
                   Select a section first
                 </div>
               )}
+              {errors?.subsections && (
+                <p data-cy="error-subsections" className="text-sm text-destructive">{errors.subsections}</p>
+              )}
             </div>
           </div>
         </div>
@@ -152,8 +174,10 @@ export function ArticleForm({ formData, onChange }: ArticleFormProps) {
 
       {/* Content Editor */}
       <div className="space-y-2">
-        <Label htmlFor="content">Content</Label>
-        <div className="h-[400px] lg:h-[500px]">
+        <Label htmlFor="content">
+          Content <span className="text-destructive">*</span>
+        </Label>
+        <div data-cy="article-form-editor" className={`h-[400px] lg:h-[500px] ${errors?.content ? "rounded-md border border-destructive" : ""}`}>
           <MDEditor
             value={formData.content}
             onChange={(data) => onChange("content", data || "")}
@@ -196,6 +220,9 @@ export function ArticleForm({ formData, onChange }: ArticleFormProps) {
             ]}
           />
         </div>
+        {errors?.content && (
+          <p data-cy="error-content" className="text-sm text-destructive">{errors.content}</p>
+        )}
       </div>
     </div>
   );

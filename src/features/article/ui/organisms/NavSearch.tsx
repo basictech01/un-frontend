@@ -81,10 +81,11 @@ export function NavSearch() {
   return (
     <>
       {/* ── DESKTOP (xl+): own relative container so dropdown anchors here ── */}
-      <div className="relative hidden xl:flex items-center">
+      <div className="relative hidden xl:flex items-center z-20">
         {!isOpen && (
           <button
             onClick={open}
+            data-cy="search-toggle"
             className="p-2 text-slate-600 hover:text-slate-900 transition-colors rounded-lg hover:bg-slate-100"
             aria-label="Open search"
           >
@@ -101,10 +102,12 @@ export function NavSearch() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search stories…"
+              data-cy="search-input"
               className="flex-1 text-sm text-slate-900 placeholder:text-slate-400 bg-transparent border-none outline-none"
             />
             <button
               onClick={close}
+              data-cy="search-close"
               className="p-1 text-slate-400 hover:text-slate-700 transition-colors rounded-lg hover:bg-slate-100 shrink-0"
               aria-label="Close search"
             >
@@ -115,7 +118,7 @@ export function NavSearch() {
 
         {/* Desktop dropdown — right-aligned under the input, anchored here */}
         {isOpen && hasQuery && (
-          <div className="absolute top-full right-0 mt-2 w-96 bg-white border border-slate-100 rounded-2xl shadow-2xl z-20 max-h-[420px] overflow-y-auto">
+          <div data-cy="search-results" className="absolute top-full right-0 mt-2 w-96 bg-white border border-slate-100 rounded-2xl shadow-2xl z-20 max-h-[420px] overflow-y-auto">
             <div className="p-3">{resultPanel}</div>
           </div>
         )}
@@ -172,9 +175,9 @@ export function NavSearch() {
             </div>
           </div>
 
-          {/* Invisible backdrop — click outside to close, no grey overlay */}
+          {/* Invisible backdrop — click outside to close (mobile only) */}
           <div
-            className="fixed inset-0 z-10"
+            className="xl:hidden fixed inset-0 z-10"
             onClick={close}
             aria-hidden
           />

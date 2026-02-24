@@ -41,7 +41,7 @@ export default function AdminDashboardPage() {
   const recentArticles = articles.slice(0, 5);
 
   return (
-    <div className="space-y-8">
+    <div data-cy="admin-dashboard" className="space-y-8">
       <PageHeader
         icon={Sparkles}
         title="Admin Dashboard"

@@ -23,7 +23,7 @@ export function HeroSection({ article, loading }: HeroSectionProps) {
   }
 
   return (
-    <section className="relative h-[65vh] min-h-[50vh] rounded-[2.5rem] overflow-hidden mb-16 group shadow-2xl bg-slate-200">
+    <section data-cy="hero-section" className="relative h-[65vh] min-h-[50vh] rounded-[2.5rem] overflow-hidden mb-16 group shadow-2xl bg-slate-200">
       {/* Background */}
       <div className="absolute inset-0">
         {article?.cover_image ? (
@@ -44,7 +44,7 @@ export function HeroSection({ article, loading }: HeroSectionProps) {
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-16 lg:p-20">
         <div className="max-w-4xl">
-          <h2 className="font-display text-5xl md:text-7xl text-white mb-8 leading-[1.05] font-medium tracking-tight">
+          <h2 data-cy="hero-title" className="font-display text-5xl md:text-7xl text-white mb-8 leading-[1.05] font-medium tracking-tight">
             {title}
           </h2>
           <div className="flex flex-col md:flex-row md:items-center gap-8">
@@ -55,7 +55,7 @@ export function HeroSection({ article, loading }: HeroSectionProps) {
               asChild
               className="rounded-full bg-white text-slate-950 px-8 h-auto py-4 font-bold hover:bg-primary hover:text-white transition-all shrink-0 self-start"
             >
-              <Link href={href}>
+              <Link data-cy="hero-cta" href={href}>
                 Read Story
                 <ArrowRight className="w-5 h-5" />
               </Link>

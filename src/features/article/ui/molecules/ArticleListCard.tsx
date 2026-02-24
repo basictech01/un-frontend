@@ -15,6 +15,7 @@ export function ArticleListCard({ article }: ArticleListCardProps) {
   return (
     <Link
       href={`/articles/${article.id}`}
+      data-cy="article-list-card"
       className="flex gap-4 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm group cursor-pointer hover:border-slate-200 transition-colors"
     >
       <div className="relative w-32 h-24 md:w-36 md:h-24 shrink-0 rounded-xl overflow-hidden">

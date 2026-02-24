@@ -38,7 +38,7 @@ export default function AuthorDashboardPage() {
   const recentArticles = articles.slice(0, 5);
 
   return (
-    <div className="space-y-8">
+    <div data-cy="author-dashboard" className="space-y-8">
       <PageHeader
         icon={Sparkles}
         title="Author Dashboard"

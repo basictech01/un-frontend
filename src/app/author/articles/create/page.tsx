@@ -8,7 +8,7 @@ import { ArticleForm } from "@/features/article/ui/molecules/ArticleForm";
 import { useCreateArticle } from "@/features/article/hooks/useCreateArticle";
 
 export default function AuthorCreateArticlePage() {
-  const { formData, handleChange, handleSubmit, handleReset, isLoading } =
+  const { formData, errors, handleChange, handleSubmit, handleReset, isLoading } =
     useCreateArticle("/author/articles");
 
   const handleSaveDraft = () => handleSubmit(false);
@@ -45,7 +45,7 @@ export default function AuthorCreateArticlePage() {
           <CardTitle className="text-primary">Article Details</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6 pt-6">
-          <ArticleForm formData={formData} onChange={handleChange} />
+          <ArticleForm formData={formData} onChange={handleChange} errors={errors} />
 
           {/* Action Buttons */}
           <div className="border-t border-border pt-6">
@@ -66,6 +66,7 @@ export default function AuthorCreateArticlePage() {
                   type="button"
                   onClick={handleSaveDraft}
                   disabled={isLoading}
+                  data-cy="save-draft-btn"
                   className="w-full border border-gray-300 bg-gray-100 text-gray-700 shadow-sm hover:bg-gray-200 sm:w-auto"
                 >
                   <Save className="mr-2 h-4 w-4" />
@@ -75,6 +76,7 @@ export default function AuthorCreateArticlePage() {
                 <Button
                   onClick={handleSubmitForReview}
                   disabled={isLoading}
+                  data-cy="submit-review-btn"
                   className="btn-primary-action w-full shadow-md transition-all hover:shadow-lg sm:w-auto"
                 >
                   {isLoading ? (

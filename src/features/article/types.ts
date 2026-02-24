@@ -12,6 +12,13 @@ export interface ArticleFormState {
   status: ArticleStatus;
 }
 
+export interface ArticleFormErrors {
+  title?: string;
+  content?: string;
+  section?: string;
+  subsections?: string;
+}
+
 export interface ArticleFilterState {
   search: string;
   status: ArticleStatus | "";

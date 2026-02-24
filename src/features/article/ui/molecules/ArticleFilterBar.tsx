@@ -46,7 +46,7 @@ export function ArticleFilterBar({
             />
           </div>
           <Select value={status || "all"} onValueChange={onStatusChange}>
-            <SelectTrigger>
+            <SelectTrigger aria-label="Filter by status" data-cy="filter-status">
               <SelectValue placeholder="All statuses" />
             </SelectTrigger>
             <SelectContent>

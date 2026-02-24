@@ -52,3 +52,8 @@ storybook-static/
 # GraphQL
 .graphql-config
 graphql.schema.json
+
+# Cypress
+cypress.env.json
+cypress/screenshots/
+cypress/videos/
