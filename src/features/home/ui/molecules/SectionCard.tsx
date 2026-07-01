@@ -9,7 +9,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { SECTIONS } from "@/types/enums";
+import { SECTIONS, SECTION_BANNERS } from "@/types/enums";
 import type { SectionCardProps } from "@/types/public";
 
 const SECTION_CONFIG: Record<
@@ -65,7 +65,11 @@ export function SectionCard({ sectionKey, article }: SectionCardProps) {
     >
       <div className="aspect-[16/10] overflow-hidden bg-slate-100 relative">
         <Image
-          src={article?.cover_image ?? `https://picsum.photos/seed/${sectionKey}/800/500`}
+          src={
+            SECTION_BANNERS[sectionKey] ??
+            article?.cover_image ??
+            `https://picsum.photos/seed/${sectionKey}/800/500`
+          }
           alt={section.label}
           fill
           className="object-cover transition-all duration-700 group-hover:scale-105"

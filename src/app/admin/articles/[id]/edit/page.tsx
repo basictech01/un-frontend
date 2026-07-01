@@ -4,7 +4,7 @@ import { use } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { Button } from "@/ui/button";
-import { ArrowLeft, Save, X } from "lucide-react";
+import { ArrowLeft, Loader2, Save, X } from "lucide-react";
 import { ArticleForm } from "@/features/article/ui/molecules/ArticleForm";
 import { useArticle } from "@/features/article/hooks/useArticle";
 import { useUpdateArticle } from "@/features/article/hooks/useUpdateArticle";
@@ -106,8 +106,17 @@ export default function EditArticlePage({
                 disabled={isLoading}
                 className="w-full bg-primary text-primary-foreground shadow-md sm:w-auto"
               >
-                <Save className="mr-2 h-4 w-4" />
-                {isLoading ? 'Saving...' : 'Save Changes'}
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <Save className="mr-2 h-4 w-4" />
+                    Save Changes
+                  </>
+                )}
               </Button>
             </div>
           </div>

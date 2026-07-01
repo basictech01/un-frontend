@@ -3,6 +3,7 @@
 import { useMemo, useRef, useEffect, useState } from "react";
 import {
   SECTIONS,
+  SECTION_BANNERS,
   SUBSECTIONS,
   getSubsectionsForSection,
   slugToSectionKey,
@@ -180,7 +181,10 @@ export function SectionPageContent({ sectionKey }: SectionPageContentProps) {
     );
   }
 
-  const heroCoverImage = articles.at(0)?.cover_image ?? null;
+  const heroCoverImage =
+    (canonicalKey && SECTION_BANNERS[canonicalKey]) ??
+    articles.at(0)?.cover_image ??
+    null;
 
   return (
     <>

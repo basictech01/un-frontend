@@ -10,6 +10,7 @@ import { ArticleStatus } from "@/types/enums";
 import { apiClient } from "@/lib/api";
 
 export function useUpdateArticle(article: Article | null) {
+  const [isUploading, setIsUploading] = useState(false);
   const [formData, setFormData] = useState<ArticleFormState>({
     title: "",
     content: "",
@@ -57,10 +58,15 @@ export function useUpdateArticle(article: Article | null) {
 
       // Upload image if a new file was selected
       if (formData.coverImageFile?.file) {
-        const uploadResult = await apiClient.uploadImage(
-          formData.coverImageFile.file
-        );
-        coverImageUrl = uploadResult.url;
+        setIsUploading(true);
+        try {
+          const uploadResult = await apiClient.uploadImage(
+            formData.coverImageFile.file
+          );
+          coverImageUrl = uploadResult.url;
+        } finally {
+          setIsUploading(false);
+        }
       }
 
       await updateMutation({
@@ -84,5 +90,5 @@ export function useUpdateArticle(article: Article | null) {
     }
   }, [article, formData, updateMutation]);
 
-  return { formData, handleChange, handleSubmit, isLoading: loading };
+  return { formData, handleChange, handleSubmit, isLoading: loading || isUploading };
 }

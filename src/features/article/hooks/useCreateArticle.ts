@@ -15,6 +15,7 @@ export function useCreateArticle(redirectPath: string = "/admin") {
   const router = useRouter();
   const [formData, setFormData] = useState<ArticleFormState>(initialArticleForm);
   const [errors, setErrors] = useState<ArticleFormErrors>({});
+  const [isUploading, setIsUploading] = useState(false);
 
   const [createMutation, { loading: createLoading }] = useMutation<{
     createArticle: Article;
@@ -51,10 +52,15 @@ export function useCreateArticle(redirectPath: string = "/admin") {
         let coverImageUrl = "";
 
         if (formData.coverImageFile?.file) {
-          const uploadResult = await apiClient.uploadImage(
-            formData.coverImageFile.file
-          );
-          coverImageUrl = uploadResult.url;
+          setIsUploading(true);
+          try {
+            const uploadResult = await apiClient.uploadImage(
+              formData.coverImageFile.file
+            );
+            coverImageUrl = uploadResult.url;
+          } finally {
+            setIsUploading(false);
+          }
         }
 
         const result = await createMutation({
@@ -100,6 +106,6 @@ export function useCreateArticle(redirectPath: string = "/admin") {
     handleChange,
     handleSubmit,
     handleReset,
-    isLoading: createLoading || submitLoading,
+    isLoading: createLoading || submitLoading || isUploading,
   };
 }

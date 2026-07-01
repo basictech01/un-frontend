@@ -54,6 +54,16 @@ export const SECTIONS = {
   },
 } as const;
 
+/** Static banner/cover images per section (served from /public). */
+export const SECTION_BANNERS: Record<string, string> = {
+  VOICES_AND_VISIONARIES: "/Voices_%26_Visionaries.png",
+  LEARNING_AND_LADDERS: "/Learning_Ladder.png",
+  STATE_AND_STEWARDSHIP: "/state_stewardship.png",
+  GROWTH_AND_GRIT: "/Growth_grit.png",
+  NATURE_AND_NURTURE: "/nature_nature.png",
+  SPIRIT_AND_STORY: "/Spirit_Story.png",
+};
+
 export const SUBSECTIONS: Record<
   string,
   { label: string; tagline: string; description: string; parentSection: string }

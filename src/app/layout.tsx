@@ -17,6 +17,11 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Uttrakhand Next | Empower Future, Inspire Generations",
   description: "Premium digital platform documenting the socio-economic and cultural evolution of the Himalayan state of Uttarakhand.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
